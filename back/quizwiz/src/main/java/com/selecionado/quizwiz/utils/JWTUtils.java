@@ -28,7 +28,7 @@ public class JWTUtils {
      * @param token
      * @return
      */
-    public String extractUsername(String token) {
+    public String getEmail(String token) {
         return getClaim(token, Claims::getSubject);
     }
 
@@ -44,7 +44,7 @@ public class JWTUtils {
                 .setClaims(claims)
                 .setSubject(subject)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + timeExpiration)) //10 horas
+                .setExpiration(new Date(System.currentTimeMillis() + timeExpiration))
                 .signWith(Keys.hmacShaKeyFor(secretKey.getBytes()), SignatureAlgorithm.HS256)
                 .compact();
     }
@@ -60,17 +60,36 @@ public class JWTUtils {
      * @return boolean
      */
     public boolean isTokenValid(String token, UserDetails user) {
-        final String username = extractUsername(token);
+        final String username = getEmail(token);
         return (username.equals(user.getUsername()));
     }
 
     /**
-     * Obtener la informacion de usuario del token
+     * Obtener el username del token
      * @param token
      * @return username
      */
     public String getUsernameFromToken(String token){
         return getClaim(token, Claims::getSubject);
+    }
+
+    /**
+     * Obtener la fecha de expiracion del token
+     * @param token
+     * @return date
+     */
+    public Date getExpirationDate(String token){
+        return getClaim(token, Claims::getIssuedAt);
+    }
+
+    /**
+     * Devuelve true si la fecha del token expiro, sino devuelve false
+     * @param token
+     * @return boolean
+     */
+    public boolean isTokenExpired(String token) {
+        Date expirationDate = getExpirationDate(token);
+        return expirationDate.after(new Date());
     }
 
     /**
