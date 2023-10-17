@@ -1,7 +1,7 @@
 import Image from "next/image";
 
-import Tick from "../../../assets/icons/tick.svg"
-import LogoWhite from "../../../assets/images/logo-white.svg"
+import Tick from "@/assets/icons/tick.svg"
+import LogoWhite from "@/assets/images/logo-white.svg"
 
 export default function SuccessMessageModal() {
   return (

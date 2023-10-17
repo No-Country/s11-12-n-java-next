@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import ErrorLocker from "../../../assets/icons/error-locker.svg"
+import ErrorLocker from "@/assets/icons/error-locker.svg"
 
 export default function ErrorMessageModal() {
   return (
