@@ -24,7 +24,10 @@ public class UserService implements IUserService{
 	@Override
 	public void saveUser(UserDTOReq userDTO) throws ExistsEmailException, ConfirmPasswordException {
 		this.userValidation(userDTO);
-		userRepository.save(modelMapper.map(userDTO, User.class));	
+		var user = modelMapper.map(userDTO, User.class);
+		user.setEnabled(true);
+
+		userRepository.save(user);
 	}
 
 	@Override
@@ -44,10 +47,13 @@ public class UserService implements IUserService{
 	}
 
 	@Override
-	public void deleteUser(Long id) {
-		var user = userRepository.findById(id).orElse(null);
-		user.setEnabled(false);
-		userRepository.save(user);
+	public void deleteUser(Long id){
+		var user = userRepository.findById(id).orElseThrow();
+
+		if(user.isEnabled()){
+			user.setEnabled(false);
+			userRepository.save(user);
+		}
 	}
 	
 	

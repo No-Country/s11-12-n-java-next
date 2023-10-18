@@ -32,7 +32,7 @@ public class User implements UserDetails {
     private Long id;
     private String email;
     private String password;
-    private boolean enabled;
+    private Boolean enabled;
     @ManyToOne
     @JoinColumn(name = "idRole")
     private Role role;

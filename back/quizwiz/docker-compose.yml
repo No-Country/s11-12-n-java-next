@@ -8,9 +8,9 @@ services:
     ports:
       - "8080:8080"
     environment:
-      - DATABASE_URL=${URL}
-      - DATABASE_USERNAME=${USER}
-      - DATABASE_PASSWORD=${PASSWORD}
+      - DATABASE_URL=${PROD_URL}
+      - DATABASE_USERNAME=${DB_USERNAME}
+      - DATABASE_PASSWORD=${DB_PASSWORD}
     restart: always
     depends_on:
       - java_db

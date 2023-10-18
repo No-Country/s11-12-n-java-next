@@ -29,7 +29,7 @@ public class UserController {
 	@PostMapping()
 	public ResponseEntity<HttpStatus> saveUser(@RequestBody UserDTOReq userDTO) throws ExistsEmailException, ConfirmPasswordException{
 		userService.saveUser(userDTO);
-		return new ResponseEntity<HttpStatus>(HttpStatus.CREATED);
+		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
 	
 	@GetMapping("/{id}")
@@ -40,13 +40,13 @@ public class UserController {
 	@PutMapping()
 	public ResponseEntity<HttpStatus> updateUser(@RequestBody UserDTOReq userDTO) throws UserIDNotFoundException, ExistsEmailException, ConfirmPasswordException{
 		userService.updateUser(userDTO);
-		return new ResponseEntity<HttpStatus>(HttpStatus.OK);	
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
 	@DeleteMapping("/{id}")
 	public ResponseEntity<HttpStatus> deleteUser(@PathVariable Long id){
 		userService.deleteUser(id);
-		return new ResponseEntity<HttpStatus>(HttpStatus.OK);
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
 
