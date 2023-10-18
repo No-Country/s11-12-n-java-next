@@ -1,20 +1,9 @@
-'use client';
 import Image from "next/image";
 import logo from '@/assets/images/logo.svg'
 import Button from "../ui/button/Button";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function SignIn() {
-
-    const router = useRouter()
-
-    const handleRegister = () => {
-        router.push('/register')
-    }
-
-    const handleLogin = () => {
-        router.push('/login')
-    }
 
     return (
         <div className="flex flex-col gap-28 w-full h-screen p-3 items-center">
@@ -31,10 +20,11 @@ export default function SignIn() {
             <div className="w-full flex flex-col gap-6">
 
                 <Button
+                    as={Link}
+                    href="/register"
                     className="w-full"
                     size="md"
                     color="secondary"
-                    onClick={() => handleRegister()}
                 >
                     Únete ahora
                 </Button>
@@ -46,9 +36,10 @@ export default function SignIn() {
                         ¿Ya eres usuario?
                     </span>
                     <Button
+                        as={Link}
+                        href="/login"
                         className="w-full"
                         size="md"
-                        onClick={() => handleLogin()}
                     >
                         Iniciar sesión
                     </Button>
