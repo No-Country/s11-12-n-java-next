@@ -22,7 +22,7 @@ public class UserController {
         return new ResponseEntity<>(userService.findAll(), HttpStatus.OK);
     }
 
-    @GetMapping(value = "/{id}")
+    @GetMapping(value = "/{userId}")
     public ResponseEntity<?> getUserById(@PathVariable Long userId){
         try {
             User user = userService.findById(userId);
@@ -38,7 +38,7 @@ public class UserController {
         return new ResponseEntity<>(user, HttpStatus.CREATED);
     }
 
-    @PutMapping(value = "/{roleId}")
+    @PutMapping(value = "/{userId}")
     public ResponseEntity<?> updateUser(@PathVariable Long userId, @RequestBody UserDtoReq userDtoReq){
         try {
             User userUpdate = userService.update(userDtoReq, userId);
@@ -48,7 +48,7 @@ public class UserController {
         }
     }
 
-    @DeleteMapping(value = "/{id}")
+    @DeleteMapping(value = "/{userId}")
     public ResponseEntity<?> deleteUser(@PathVariable Long userId){
         try {
             userService.delete(userId);

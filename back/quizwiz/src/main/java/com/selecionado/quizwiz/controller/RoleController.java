@@ -21,7 +21,7 @@ public class RoleController {
         return new ResponseEntity<>(roleService.findAll(), HttpStatus.OK);
     }
 
-    @GetMapping(value = "/{id}")
+    @GetMapping(value = "/{roleId}")
     public ResponseEntity<?> getRoleById(@PathVariable Long roleId){
         try {
             Role role = roleService.findById(roleId);
@@ -47,7 +47,7 @@ public class RoleController {
         }
     }
 
-    @DeleteMapping(value = "/{id}")
+    @DeleteMapping(value = "/{roleId}")
     public ResponseEntity<?> deleteRole(@PathVariable Long roleId){
         try {
             roleService.delete(roleId);
