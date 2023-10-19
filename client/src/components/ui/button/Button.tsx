@@ -32,7 +32,7 @@ export const Button = extendVariants(NextUiButton, {
     {
       isDisabled: true,
       color: "primary",
-      class: "bg-[#84cc16]/80 opacity-100",
+      // class: "bg-[#84cc16]/80 opacity-100",
     },
   ],
 });
