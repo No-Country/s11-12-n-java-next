@@ -13,7 +13,7 @@ const SliderContent = ({ currentSlider }: Props) => {
       {data.map((slide, index) => (
         <div
           key={slide.id}
-          className={`h-full flex flex-col items-center gap-6 ${
+          className={`h-full flex flex-col items-center gap-6 animate-appearance-in animation-duration-500 ${
             currentSlider !== index ? "hidden" : ""
           }`}
         >
