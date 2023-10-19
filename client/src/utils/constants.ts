@@ -1,13 +1,13 @@
-import slider1 from "@/assets/images/slider1.svg";
-import slider2 from "@/assets/images/slider2.svg";
-import slider3 from "@/assets/images/slider3.svg";
-import slider4 from "@/assets/images/slider4.svg";
+import slider1 from "@/assets/images/slider1_mobile.svg";
+import slider2 from "@/assets/images/slider2_mobile.svg";
+import slider3 from "@/assets/images/slider3_mobile.svg";
+import slider4 from "@/assets/images/slider4_mobile.svg";
 
 const sliderLandingData = [
   {
     id: 1,
     image: { src: slider1, alt: "Character with a checkbox notebook" },
-    text: "TU NUEVA FORMA DE CREAR FORMULARIOS",
+    text: "Tu nueva forma de crear formularios",
   },
   {
     id: 2,
