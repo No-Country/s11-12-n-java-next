@@ -1,6 +1,6 @@
 package com.selecionado.quizwiz.service;
 
-import com.selecionado.quizwiz.dto.request.UserDtoReq;
+import com.selecionado.quizwiz.dto.request.UserDtoRe;
 import com.selecionado.quizwiz.repository.IRoleRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +26,7 @@ public class UserServiceImpl implements IUserService{
 	private ModelMapper modelMapper;
 
 	@Override
-	public void saveUser(UserDtoReq userDTO) throws ExistsEmailException, ConfirmPasswordException, UserIDNotFoundException {
+	public void saveUser(UserDtoRe userDTO) throws ExistsEmailException, ConfirmPasswordException, UserIDNotFoundException {
 
 		var role = roleRepository.findByRoleName("USER")
 				.orElseThrow(() -> new UserIDNotFoundException("Debe crear los roles de usuario"));
@@ -46,7 +46,7 @@ public class UserServiceImpl implements IUserService{
 	}
 
 	@Override
-	public void updateUser(UserDtoReq userDTO) throws UserIDNotFoundException, ExistsEmailException, ConfirmPasswordException {
+	public void updateUser(UserDtoRe userDTO) throws UserIDNotFoundException, ExistsEmailException, ConfirmPasswordException {
 		var user = userRepository.findById(userDTO.getId())
 				.orElseThrow(() -> new UserIDNotFoundException("El id " + userDTO + " no existe." ));
 		this.userUpdateValidation(userDTO, user);
@@ -65,7 +65,7 @@ public class UserServiceImpl implements IUserService{
 	}
 	
 	
-	public void userValidation(UserDtoReq userDTO) throws ExistsEmailException, ConfirmPasswordException {
+	public void userValidation(UserDtoRe userDTO) throws ExistsEmailException, ConfirmPasswordException {
 
 		if(userRepository.existsByEmail(userDTO.getEmail())) {
 			throw new ExistsEmailException("El email ya se encuentra registrado");
@@ -75,7 +75,7 @@ public class UserServiceImpl implements IUserService{
 		}
 	}
 	
-	public void userUpdateValidation(UserDtoReq userDTO, User user) throws ExistsEmailException, ConfirmPasswordException, UserIDNotFoundException {
+	public void userUpdateValidation(UserDtoRe userDTO, User user) throws ExistsEmailException, ConfirmPasswordException, UserIDNotFoundException {
 		if(userRepository.existsByEmail(userDTO.getEmail()) && !userDTO.getEmail().equals(user.getEmail()) ) {
 			throw new ExistsEmailException("El email ya se encuentra registrado");
 		}
