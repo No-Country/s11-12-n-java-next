@@ -1,10 +1,11 @@
 package com.selecionado.quizwiz.service;
 
+import com.selecionado.quizwiz.dto.request.UserDtoReq;
+import com.selecionado.quizwiz.repository.IRoleRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.selecionado.quizwiz.dto.request.UserDTOReq;
 import com.selecionado.quizwiz.dto.response.UserDTORes;
 import com.selecionado.quizwiz.exceptions.ConfirmPasswordException;
 import com.selecionado.quizwiz.exceptions.ExistsEmailException;
@@ -13,19 +14,26 @@ import com.selecionado.quizwiz.model.User;
 import com.selecionado.quizwiz.repository.IUserRepository;
 
 @Service
-public class UserService implements IUserService{
+public class UserServiceImpl implements IUserService{
 	
 	@Autowired
 	private IUserRepository userRepository;
+
+	@Autowired
+	private IRoleRepository roleRepository;
 	
 	@Autowired
 	private ModelMapper modelMapper;
 
 	@Override
-	public void saveUser(UserDTOReq userDTO) throws ExistsEmailException, ConfirmPasswordException {
+	public void saveUser(UserDtoReq userDTO) throws ExistsEmailException, ConfirmPasswordException, UserIDNotFoundException {
+
+		var role = roleRepository.findByRoleName("USER")
+				.orElseThrow(() -> new UserIDNotFoundException("Debe crear los roles de usuario"));
 		this.userValidation(userDTO);
 		var user = modelMapper.map(userDTO, User.class);
 		user.setEnabled(true);
+		user.setRole(role);
 
 		userRepository.save(user);
 	}
@@ -38,7 +46,7 @@ public class UserService implements IUserService{
 	}
 
 	@Override
-	public void updateUser(UserDTOReq userDTO) throws UserIDNotFoundException, ExistsEmailException, ConfirmPasswordException {
+	public void updateUser(UserDtoReq userDTO) throws UserIDNotFoundException, ExistsEmailException, ConfirmPasswordException {
 		var user = userRepository.findById(userDTO.getId())
 				.orElseThrow(() -> new UserIDNotFoundException("El id " + userDTO + " no existe." ));
 		this.userUpdateValidation(userDTO, user);
@@ -57,7 +65,7 @@ public class UserService implements IUserService{
 	}
 	
 	
-	public void userValidation(UserDTOReq userDTO) throws ExistsEmailException, ConfirmPasswordException {
+	public void userValidation(UserDtoReq userDTO) throws ExistsEmailException, ConfirmPasswordException {
 
 		if(userRepository.existsByEmail(userDTO.getEmail())) {
 			throw new ExistsEmailException("El email ya se encuentra registrado");
@@ -67,7 +75,7 @@ public class UserService implements IUserService{
 		}
 	}
 	
-	public void userUpdateValidation(UserDTOReq userDTO, User user) throws ExistsEmailException, ConfirmPasswordException, UserIDNotFoundException {
+	public void userUpdateValidation(UserDtoReq userDTO, User user) throws ExistsEmailException, ConfirmPasswordException, UserIDNotFoundException {
 		if(userRepository.existsByEmail(userDTO.getEmail()) && !userDTO.getEmail().equals(user.getEmail()) ) {
 			throw new ExistsEmailException("El email ya se encuentra registrado");
 		}

@@ -7,12 +7,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserDtoReq {
+public class RoleDtoReq {
 
     private Long id;
-    private String fullName;
-    private String email;
-    private String password;
-    private String confirmPassword;
-    private Boolean enabled;
+    private String roleName;
 }
