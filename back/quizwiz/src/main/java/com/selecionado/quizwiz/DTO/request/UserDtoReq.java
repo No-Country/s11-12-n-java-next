@@ -1,4 +1,4 @@
 package com.selecionado.quizwiz.dto.request;
 
-public class UserDtoRe {
+public class UserDtoReq {
 }
