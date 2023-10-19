@@ -1,6 +1,6 @@
 package com.selecionado.quizwiz.service;
 
-import com.selecionado.quizwiz.DTO.request.RoleDtoReq;
+import com.selecionado.quizwiz.dto.request.RoleDtoReq;
 import com.selecionado.quizwiz.model.Role;
 import com.selecionado.quizwiz.repository.IRoleRepository;
 import org.modelmapper.ModelMapper;

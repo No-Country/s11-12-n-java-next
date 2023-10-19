@@ -4,6 +4,7 @@ import com.selecionado.quizwiz.dto.request.UserDtoReq;
 import com.selecionado.quizwiz.repository.IRoleRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.selecionado.quizwiz.dto.response.UserDTORes;
@@ -20,6 +21,9 @@ public class UserServiceImpl implements IUserService{
 	private IUserRepository userRepository;
 
 	@Autowired
+	private PasswordEncoder passwordEncoder;
+
+	@Autowired
 	private IRoleRepository roleRepository;
 	
 	@Autowired
@@ -28,12 +32,13 @@ public class UserServiceImpl implements IUserService{
 	@Override
 	public void saveUser(UserDtoReq userDTO) throws ExistsEmailException, ConfirmPasswordException, UserIDNotFoundException {
 
-		var role = roleRepository.findByRoleName("USER")
+		var role = roleRepository.findByRolename("USER")
 				.orElseThrow(() -> new UserIDNotFoundException("Debe crear los roles de usuario"));
 		this.userValidation(userDTO);
 		var user = modelMapper.map(userDTO, User.class);
 		user.setEnabled(true);
 		user.setRole(role);
+		user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
 
 		userRepository.save(user);
 	}
@@ -50,8 +55,9 @@ public class UserServiceImpl implements IUserService{
 		var user = userRepository.findById(userDTO.getId())
 				.orElseThrow(() -> new UserIDNotFoundException("El id " + userDTO + " no existe." ));
 		this.userUpdateValidation(userDTO, user);
-		
-		userRepository.save(modelMapper.map(userDTO, User.class));
+		var saveUser = modelMapper.map(userDTO, User.class);
+		saveUser.setPassword(passwordEncoder.encode(user.getPassword()));
+		userRepository.save(saveUser);
 	}
 
 	@Override
