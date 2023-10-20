@@ -3,6 +3,7 @@ package com.selecionado.quizwiz.config;
 import java.io.IOException;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -21,10 +22,12 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 
 @Component
-@RequiredArgsConstructor
 public class JWTAuthenticationFilter extends OncePerRequestFilter {
-    final JWTUtils jwtUtils;
-    final UserDetailsService userDetailsService;
+
+    @Autowired
+    private JWTUtils jwtUtils;
+    @Autowired
+    private UserDetailsService userDetailsService;
 
     /**
      * Lista de paths permitidas sin autenticacion
