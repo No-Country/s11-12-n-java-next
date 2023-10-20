@@ -26,7 +26,7 @@ public class UserController {
 	@Autowired
 	private IUserService userService;
 	
-	@PostMapping()
+	@PostMapping("/registro")
 	public ResponseEntity<HttpStatus> saveUser(@RequestBody UserDtoReq userDTO) throws ExistsEmailException, ConfirmPasswordException, UserIDNotFoundException {
 		userService.saveUser(userDTO);
 		return new ResponseEntity<>(HttpStatus.CREATED);
