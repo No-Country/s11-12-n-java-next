@@ -1,7 +1,5 @@
 package com.selecionado.quizwiz.config;
 
-import com.selecionado.quizwiz.repository.UserRepository;
-import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,10 +12,14 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import com.selecionado.quizwiz.repository.IUserRepository;
+
+import lombok.RequiredArgsConstructor;
+
 @Configuration
 @RequiredArgsConstructor
 public class AppConfig {
-    private final UserRepository userRepository;
+    private final IUserRepository userRepository;
     /**
      * Metodo que configura el bean encriptador de contraseña
      * @return encriptador de contraseña BCrypt

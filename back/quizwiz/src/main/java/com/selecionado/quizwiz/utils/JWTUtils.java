@@ -24,19 +24,20 @@ public class JWTUtils {
     private int timeExpiration;
 
     /**
-     * Extrae el email del token
-     * @param token
-     * @return
+     * Genera token con los detalles de usuario
+     * @param userDetails informacion del usuario
+     * @return string token jwt
      */
-    public String getEmail(String token) {
-        return getClaim(token, Claims::getSubject);
+    public String generateToken(UserDetails userDetails) {
+        Map<String, Object> claims = new HashMap<>();
+        return createToken(claims, userDetails.getUsername());
     }
 
     /**
-     * Generar token de acceso
-     * @param claims
-     * @param subject
-     * @return token
+     * Crea token de acceso
+     * @param claims reclamaciones
+     * @param subject email
+     * @return  string token jwt
      */
     private String createToken(Map<String, Object> claims, String subject) {
 
@@ -48,34 +49,19 @@ public class JWTUtils {
                 .signWith(Keys.hmacShaKeyFor(secretKey.getBytes()), SignatureAlgorithm.HS256)
                 .compact();
     }
-    public String generateToken(UserDetails userDetails) {
-        Map<String, Object> claims = new HashMap<>();
-        return createToken(claims, userDetails.getUsername());
-    }
 
     /**
-     * Validar el token de acceso
-     * @param token
-     * @param user
-     * @return boolean
+     * Extrae el email del token
+     * @param token string jwt token
+     * @return string email
      */
-    public boolean isTokenValid(String token, UserDetails user) {
-        final String username = getEmail(token);
-        return (username.equals(user.getUsername()));
-    }
-
-    /**
-     * Obtener el username del token
-     * @param token
-     * @return username
-     */
-    public String getUsernameFromToken(String token){
+    public String getEmail(String token) {
         return getClaim(token, Claims::getSubject);
     }
 
     /**
      * Obtener la fecha de expiracion del token
-     * @param token
+     * @param token string jwt token
      * @return date
      */
     public Date getExpirationDate(String token){
@@ -84,7 +70,7 @@ public class JWTUtils {
 
     /**
      * Devuelve true si la fecha del token expiro, sino devuelve false
-     * @param token
+     * @param token string jwt token
      * @return boolean
      */
     public boolean isTokenExpired(String token) {
@@ -92,21 +78,21 @@ public class JWTUtils {
         return expirationDate.after(new Date());
     }
 
+
     /**
-     * Obtener un solo claim
-     * @param token
-     * @param claimsTFunction
-     * @return claim
-     * @param <T>
+     * Validar el token de acceso
+     * @param token string jwt token
+     * @param user informacion de usuario
+     * @return verdadero o falso
      */
-    public <T> T getClaim(String token, Function<Claims, T> claimsTFunction){
-        Claims claims = extractAllClaims(token);
-        return claimsTFunction.apply(claims);
+    public boolean isTokenValid(String token, UserDetails user) {
+        final String username = getEmail(token);
+        return (username.equals(user.getUsername()));
     }
 
     /**
      * Obtener todos los claims del token
-     * @param token
+     * @param token string token jwt
      * @return claims
      */
     public Claims extractAllClaims(String token){
@@ -118,8 +104,20 @@ public class JWTUtils {
     }
 
     /**
-     * Obtener firma del token
-     * @return
+     * Obtener un solo claim
+     * @param token jwt string token
+     * @param claimsTFunction funcion para obtener un claim
+     * @param <T> objeto de claim a devolver
+     * @return claim informacion de un claim del token
+     */
+    public <T> T getClaim(String token, Function<Claims, T> claimsTFunction){
+        Claims claims = extractAllClaims(token);
+        return claimsTFunction.apply(claims);
+    }
+
+    /**
+     * Crear firma con algoritmo HMAC-SHA
+     * @return algoritmo HMAC-SHA
      */
     public Key getSignatureKey(){
         byte[] keyBytes = Decoders.BASE64.decode(secretKey);
