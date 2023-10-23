@@ -9,6 +9,7 @@
   --primary-foreground: #ffffff;
   --secondary: #ffffff;
   --secondary-foreground: #000000;
+  --blue-link: #6979F8;
 }
 
 /*@media (prefers-color-scheme: dark) {
