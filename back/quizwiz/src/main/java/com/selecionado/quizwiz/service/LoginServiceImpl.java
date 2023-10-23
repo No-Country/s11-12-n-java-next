@@ -28,11 +28,11 @@ public class LoginServiceImpl implements ILoginService{
     public AuthResponseDtoRes authenticate(AuthRequestDtoReq request) {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
-                        request.getUsername(),
+                        request.getEmail(),
                         request.getPassword()
                 )
         );
-        var user = userRepository.findByEmail(request.getUsername()).orElseThrow();
+        var user = userRepository.findByEmail(request.getEmail()).orElseThrow();
         var token = jwtUtils.generateToken(user);
         return new AuthResponseDtoRes(token);
     }
