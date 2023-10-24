@@ -6,25 +6,33 @@ import { Input } from "@nextui-org/react";
 import Button from "@/components/ui/button/Button";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { registerValidationSchema } from "@/validations/auth-schema.validate";
-
-type Inputs = {
-  nombre: string;
-  email: string;
-  password: string;
-  password2: string;
-};
-
+import { EyeFilledIcon } from "../ui/EyeFilledIcon";
+import { EyeSlashFilledIcon } from "../ui/EyeSlashFilledIcon";
+import { useState } from "react";
+import useSession from "@/hooks/useSession";
+import { useRouter } from "next/navigation";
 export default function FormRegister() {
+  const router = useRouter();
+  const { handleRegister } = useSession();
+  const [isVisible, setIsVisible] = useState(false);
+
+  const toggleVisibility = () => setIsVisible(!isVisible);
+
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<Inputs>({
+  } = useForm<RegisterData>({
     resolver: yupResolver(registerValidationSchema),
     mode: "onBlur",
   });
 
-  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<RegisterData> = async (data) => {
+    console.log(data);
+    const res = await handleRegister(data);
+    res.resolved ? router.push("/login") : console.log(res.payload);
+    //! ver modal
+  };
 
   return (
     <>
@@ -47,13 +55,13 @@ export default function FormRegister() {
           onSubmit={handleSubmit(onSubmit)}
         >
           <Input
-            {...register("nombre")}
+            {...register("fullName")}
             size="sm"
             type="text"
             label="Nombre Completo"
             className="border border-black rounded bg-white"
           />
-          {errors.nombre?.message}
+          {errors.fullName?.message}
           <Input
             {...register("email")}
             size="sm"
@@ -65,19 +73,45 @@ export default function FormRegister() {
           <Input
             {...register("password")}
             size="sm"
-            type="password"
+            type={isVisible ? "text" : "password"}
             label="Contraseña"
             className="border border-black rounded bg-white"
+            endContent={
+              <button
+                className="focus:outline-none"
+                type="button"
+                onClick={toggleVisibility}
+              >
+                {isVisible ? (
+                  <EyeSlashFilledIcon className="text-2xl text-default-400 pointer-events-none" />
+                ) : (
+                  <EyeFilledIcon className="text-2xl text-default-400 pointer-events-none" />
+                )}
+              </button>
+            }
           />
           {errors.password?.message}
           <Input
-            {...register("password2")}
+            {...register("confirmPassword")}
             size="sm"
-            type="password"
+            type={isVisible ? "text" : "password"}
             label="Repita nuevamente la contraseña"
             className="border border-black rounded bg-white "
+            endContent={
+              <button
+                className="focus:outline-none"
+                type="button"
+                onClick={toggleVisibility}
+              >
+                {isVisible ? (
+                  <EyeSlashFilledIcon className="text-2xl text-default-400 pointer-events-none" />
+                ) : (
+                  <EyeFilledIcon className="text-2xl text-default-400 pointer-events-none" />
+                )}
+              </button>
+            }
           />
-          {errors.password2?.message}
+          {errors.confirmPassword?.message}
           <Button
             size="xl"
             className="w-full mt-20"
