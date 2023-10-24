@@ -33,7 +33,9 @@ public class User implements UserDetails {
     @JoinColumn(name = "idRole")
     private Role role;
     @OneToMany(mappedBy = "user")
-    private Form form;
+    private List<Form> createdForms;
+    @ManyToMany(mappedBy = "members")
+    private List<Form> responseForms;
 
 
     @Override

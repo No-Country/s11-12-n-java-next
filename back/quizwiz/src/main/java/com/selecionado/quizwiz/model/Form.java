@@ -20,8 +20,12 @@ public class Form {
     @ManyToOne
     @JoinColumn(name = "idCreator")
     private User creator;
+    @ManyToMany
+    @JoinTable( name = "forms_users",
+    joinColumns = @JoinColumn(name = "idForm"),
+    inverseJoinColumns = @JoinColumn(name = "idUser"))
+    private List<User> members;
     @OneToMany(mappedBy = "form")
     private List<Question> questions;
-
 
 }
