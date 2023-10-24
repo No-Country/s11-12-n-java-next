@@ -7,7 +7,7 @@ export default function FormsLayout({
   children: React.ReactNode;
 }) {
   return (
-    <section className="h-screen w-screen">
+    <section className="h-[100dvh] w-[100dvw] p-4">
       <header className="m-auto h-28 relative">
         <Image
           src={logo}
@@ -15,7 +15,7 @@ export default function FormsLayout({
           alt="Quizwiz logo"
           className="m-auto w-[127px] h-auto"
         />
-        <div className="flex items-center justify-center w-9 h-9 rounded-full bg-primary text-primary-foreground absolute top-2 right-2">
+        <div className="flex items-center justify-center w-10 h-10 rounded-full bg-primary text-primary-foreground absolute top-0 right-0">
           <span>AV</span>
         </div>
       </header>
