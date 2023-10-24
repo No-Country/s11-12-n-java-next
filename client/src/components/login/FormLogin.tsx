@@ -44,7 +44,13 @@ export default function FormLogin() {
   return (
     <>
       <div className="flex flex-col items-center">
-        <Image src={logo} alt="logo" height={169} priority />
+        <Image
+          src={logo}
+          alt="logo"
+          height={169}
+          priority
+          className=" h-auto"
+        />
         <h1 className="text-teal-700 font-bold text-3xl">¡Hola de nuevo!</h1>
         <p className="text-zinc-600 font-light text-sm">
           !Nos alegramos mucho de volver a verte!
