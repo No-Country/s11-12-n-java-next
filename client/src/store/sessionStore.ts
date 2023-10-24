@@ -13,4 +13,6 @@ export const useSessionStore = create<Store>()(
   }))
 );
 
-window.store = useSessionStore;
+if (typeof window !== "undefined") {
+  window.store = useSessionStore;
+}
