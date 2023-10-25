@@ -14,8 +14,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.selecionado.quizwiz.repository.IUserRepository;
 
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
-
+@Data
 @Configuration
 @RequiredArgsConstructor
 public class AppConfig {
