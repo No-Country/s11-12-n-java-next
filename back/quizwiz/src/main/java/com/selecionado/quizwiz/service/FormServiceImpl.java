@@ -26,6 +26,7 @@ public class FormServiceImpl implements IFormService{
 
     @Override
     public void saveForm(FormDtoReq formDto) {
+        formRepository.save(modelMapper.map(formDto, Form.class));
     }
 
     @Override
@@ -48,9 +49,10 @@ public class FormServiceImpl implements IFormService{
 
     @Override
     public void updateForm(FormDtoReq formDto) throws FormNotFoundException {
-       var form =  formRepository.findById(1L)
-               .orElseThrow(() -> new FormNotFoundException("EL formulario con id " + 1 + " no se encuentra registrado"));
-       formRepository.save(modelMapper.map(formDto, Form.class));
+        if(formRepository.existsById(formDto.getId())){
+            throw new FormNotFoundException("El formulario no se encuentra registrado");
+        }
+        formRepository.save(modelMapper.map(formDto, Form.class));
     }
 
     @Override
