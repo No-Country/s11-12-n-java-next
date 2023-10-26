@@ -11,4 +11,5 @@ public class OptionDtoReq {
     private Long id;
     private String label;
     private Boolean isSelected;
+    private QuestionDtoReq question;
 }

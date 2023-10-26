@@ -2,7 +2,11 @@ package com.selecionado.quizwiz.controller;
 
 import java.util.List;
 
+import com.selecionado.quizwiz.dto.request.QuestionDtoReq;
+import com.selecionado.quizwiz.exceptions.QuestionNotFoundExcepion;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,23 +20,24 @@ import com.selecionado.quizwiz.model.Question;
 import com.selecionado.quizwiz.service.IQuestionService;
 
 @RestController
-@RequestMapping("/api/v1/questions")
+@RequestMapping("/api/v1/preguntas")
 public class QuestionController {
 
     @Autowired
     private IQuestionService questionService;
 
     @GetMapping
-    public List<Question> getAllQuestions() {
-        return questionService.getAllQuestions();
+    public ResponseEntity<List<Question>> getAllQuestions() {
+        return ResponseEntity.ok(questionService.getAllQuestions());
     }
+
     @PostMapping
-    public Question createQuestion(@RequestBody Question question) {
-        return questionService.createQuestion(question);
+    public ResponseEntity<QuestionDtoReq> createQuestion(@RequestBody QuestionDtoReq question) {
+        return new ResponseEntity<>(questionService.createQuestion(question), HttpStatus.CREATED);
     }
     @PutMapping("/{id}")
-    public Question updateQuestion(@PathVariable Long id, @RequestBody Question updatedQuestion) {
-        return questionService.updateQuestion(id, updatedQuestion);
+    public ResponseEntity<QuestionDtoReq> updateQuestion(@PathVariable Long id, @RequestBody QuestionDtoReq updatedQuestion) throws QuestionNotFoundExcepion {
+        return new ResponseEntity<>(questionService.updateQuestion(id, updatedQuestion), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")

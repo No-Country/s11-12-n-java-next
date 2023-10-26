@@ -7,10 +7,10 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class FormDtoReq {
+public class QuestionDtoReq {
 
     private Long id;
-    private String title;
-    private String description;
-    private UserDtoReq creator;
+    private String question;
+    private String answer;
+    private FormDtoReq form;
 }

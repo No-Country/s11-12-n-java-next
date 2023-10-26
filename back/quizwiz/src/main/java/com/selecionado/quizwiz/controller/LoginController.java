@@ -23,7 +23,7 @@ public class LoginController {
 //    @Operation(
 //            summary = "Login de usuario",
 //            description = "Logueo de usuario por email y contraseña, y devuelve una respuesta http con un token JWT")
-    @PostMapping("api/v1/login")
+    @PostMapping("/api/v1/login")
     public ResponseEntity<AuthResponseDtoRes> login(@RequestBody AuthRequestDtoReq authDTO){
         return ResponseEntity.ok(loginService.authenticate(authDTO));
     }
