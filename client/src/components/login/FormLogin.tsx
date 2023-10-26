@@ -10,7 +10,7 @@ import { EyeSlashFilledIcon } from "../ui/EyeSlashFilledIcon";
 import Link from "next/link";
 import Button from "../ui/button/Button";
 import { useState } from "react";
-import { loginService } from "@/services/auth.service";
+import useSession from "@/hooks/useSession";
 import { useRouter } from "next/navigation";
 
 type Inputs = {
@@ -19,6 +19,7 @@ type Inputs = {
 };
 
 export default function FormLogin() {
+  const { handleLogin } = useSession();
   const router = useRouter();
   const [isVisible, setIsVisible] = useState(false);
 
@@ -36,7 +37,7 @@ export default function FormLogin() {
 
   const onSubmit: SubmitHandler<Passport> = async (data) => {
     console.log(data);
-    const res = await loginService(data);
+    const res = await handleLogin(data);
     res.resolved ? router.push("/dashboard") : console.log(res.payload);
     //! ver modal
   };
