@@ -9,7 +9,10 @@ export default function DashboardCard() {
   return (
     <>
       <div className="space-y-4 px-1 mt-10">
-        <Link href="/" className="w-full h-32 bg-white rounded-3xl border-2 border-indigo-500 flex items-center p-3 gap-5">
+        <Link
+          href="/quizz"
+          className="w-full h-32 bg-white rounded-3xl border-2 border-indigo-500 flex items-center p-3 gap-5"
+        >
           <Image src={icon1} alt="icon1" width={68} height={67} />
           <div className="w-60 h-28 origin-top-left rotate-[-0.60deg] mt-5">
             <span className="text-teal-700 text-2xl font-normal">
@@ -23,7 +26,10 @@ export default function DashboardCard() {
           </div>{" "}
         </Link>
 
-        <Link href="/" className="w-full h-32 bg-white rounded-3xl border-2 border-indigo-500 flex items-center p-3 gap-5">
+        <Link
+          href="/answer"
+          className="w-full h-32 bg-white rounded-3xl border-2 border-indigo-500 flex items-center p-3 gap-5"
+        >
           <Image src={icon2} alt="icon1" width={52} height={53} />
           <div className="w-60 h-28 origin-top-left rotate-[-0.60deg] mt-5">
             <span className="text-teal-700 text-2xl font-normal">
@@ -37,7 +43,10 @@ export default function DashboardCard() {
           </div>
         </Link>
 
-        <Link href="/" className="w-full h-32 bg-white rounded-3xl border-2 border-indigo-500 flex items-center p-3 gap-5">
+        <Link
+          href="/"
+          className="w-full h-32 bg-white rounded-3xl border-2 border-indigo-500 flex items-center p-3 gap-5"
+        >
           <Image src={icon3} alt="icon1" width={58} height={58} />
           <div className="w-60 h-28 origin-top-left rotate-[-0.60deg] mt-5">
             <span className="text-teal-700 text-2xl font-normal">
