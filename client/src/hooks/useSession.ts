@@ -13,6 +13,7 @@ export default function useSession() {
 
   const handleLogin = async (passport: Passport) => {
     const res = await loginService(passport);
+    console.log(res.payload);
     res.resolved && setSession(res.payload);
     console.log(res);
     return res;

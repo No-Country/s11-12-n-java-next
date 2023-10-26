@@ -12,7 +12,8 @@ export default function Welcome() {
           alt="Imagen"
           width={284}
           height={319}
-          className="m-0 p-0"
+          className="m-0 p-0 w-72 h-auto"
+          priority
         />
         <p className="text-2xl font-light text-center px-9">
           Tu nueva forma de crear formularios

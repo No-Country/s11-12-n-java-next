@@ -1,8 +1,12 @@
+"use client";
 import DashboardCard from "@/components/dashboard/DashboardCard";
 import logo from "@/assets/images/logo.svg";
 import Image from "next/image";
+import useSession from "@/hooks/useSession";
 
 export default function Dashboard() {
+  const { session } = useSession();
+  console.log("SESSION__", session);
   return (
     <>
       <div className="flex relative justify-center ">
@@ -12,8 +16,8 @@ export default function Dashboard() {
         </div>
       </div>
       <div className="flex justify-center w-96">
-      <div className="w-52 h-8 text-teal-700 text-3xl font-black leading-none text-center flex justify-center">
-          Hola Victor!
+        <div className="w-52 h-8 text-teal-700 text-3xl font-black leading-none text-center flex justify-center">
+          asd
         </div>
       </div>
       <DashboardCard />
