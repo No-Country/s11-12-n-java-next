@@ -22,6 +22,7 @@ type ApiResponse = {
 
 interface UserSession extends Passport {
   token: string;
+  fullname: string;
 }
 
 interface Passport {
