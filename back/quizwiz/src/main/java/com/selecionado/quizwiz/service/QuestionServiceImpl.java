@@ -1,8 +1,10 @@
 package com.selecionado.quizwiz.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.selecionado.quizwiz.dto.request.QuestionDtoReq;
+import com.selecionado.quizwiz.dto.response.QuestionDtoRes;
 import com.selecionado.quizwiz.exceptions.QuestionNotFoundExcepion;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +14,7 @@ import com.selecionado.quizwiz.model.Question;
 import com.selecionado.quizwiz.repository.IQuestionRepository;
 
 @Service
-public class QuestionService implements IQuestionService{
+public class QuestionServiceImpl implements IQuestionService{
 
 	
     @Autowired
@@ -22,14 +24,21 @@ public class QuestionService implements IQuestionService{
 
 
 	@Override
-	public List<Question> getAllQuestions() {
-        return questionRepository.findAll();
+	public List<QuestionDtoRes> getAllQuestions() {
+        var questions = questionRepository.findAll();
+		var questionsDto = new ArrayList<QuestionDtoRes>();
 
+		for (Question question : questions){
+			questionsDto.add(modelMapper.map(question, QuestionDtoRes.class));
+		}
+		return questionsDto;
 	}
 
 	@Override
-	public Question getQuestionById(Long id) throws QuestionNotFoundExcepion {
-        return questionRepository.findById(id).orElseThrow(() -> new QuestionNotFoundExcepion("El id de la pregunta no se encuentra registrado"));
+	public QuestionDtoRes getQuestionById(Long id) throws QuestionNotFoundExcepion {
+        var question = questionRepository.findById(id)
+				.orElseThrow(() -> new QuestionNotFoundExcepion("El id de la pregunta no se encuentra registrado"));
+		return modelMapper.map(question, QuestionDtoRes.class);
 
 	}
 

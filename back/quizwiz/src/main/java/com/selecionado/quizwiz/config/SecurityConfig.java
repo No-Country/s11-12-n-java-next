@@ -30,13 +30,13 @@ public class SecurityConfig {
                         .permitAll())
                 .authorizeHttpRequests(auth ->
                         auth.requestMatchers(
-                                        "/api/v1/usuarios",
-                                "/api/v1/preguntas",
-                                "/api/v1/formularios",
-                                "/api/v1/opciones").hasAnyRole("USER", "ADMIN"))
+                                        "/api/v1/usuarios/**",
+                                "/api/v1/preguntas/**",
+                                "/api/v1/formularios/**",
+                                "/api/v1/opciones/**").hasAnyRole("USER", "ADMIN"))
                 .authorizeHttpRequests(auth ->
                         auth.requestMatchers(
-                                "/api/v1/roles").hasRole( "ADMIN"))
+                                "/api/v1/roles/**").hasRole( "ADMIN"))
                 .sessionManagement(session->
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider)

@@ -16,7 +16,7 @@ public class FormDtoRes {
     private Long id;
     private String title;
     private String description;
-    private List<Question> questions;
+    private List<QuestionDtoRes> questions;
     private List<UserDTORes> members;
 
 }

@@ -3,6 +3,7 @@ package com.selecionado.quizwiz.controller;
 import java.util.List;
 
 import com.selecionado.quizwiz.dto.request.QuestionDtoReq;
+import com.selecionado.quizwiz.dto.response.QuestionDtoRes;
 import com.selecionado.quizwiz.exceptions.QuestionNotFoundExcepion;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,8 +28,13 @@ public class QuestionController {
     private IQuestionService questionService;
 
     @GetMapping
-    public ResponseEntity<List<Question>> getAllQuestions() {
+    public ResponseEntity<List<QuestionDtoRes>> getAllQuestions() {
         return ResponseEntity.ok(questionService.getAllQuestions());
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<QuestionDtoRes> getQuestionById(@PathVariable Long id) throws QuestionNotFoundExcepion {
+        return ResponseEntity.ok(questionService.getQuestionById(id));
     }
 
     @PostMapping

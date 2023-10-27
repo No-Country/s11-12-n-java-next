@@ -34,6 +34,6 @@ public class LoginServiceImpl implements ILoginService{
         );
         var user = userRepository.findByEmail(request.getEmail()).orElseThrow();
         var token = jwtUtils.generateToken(user);
-        return new AuthResponseDtoRes(token);
+        return new AuthResponseDtoRes(token, user.getEmail(), user.getFullName());
     }
 }
