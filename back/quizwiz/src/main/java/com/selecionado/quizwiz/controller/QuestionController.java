@@ -38,11 +38,11 @@ public class QuestionController {
     }
 
     @PostMapping
-    public ResponseEntity<QuestionDtoReq> createQuestion(@RequestBody QuestionDtoReq question) {
+    public ResponseEntity<QuestionDtoRes> createQuestion(@RequestBody QuestionDtoReq question) {
         return new ResponseEntity<>(questionService.createQuestion(question), HttpStatus.CREATED);
     }
     @PutMapping("/{id}")
-    public ResponseEntity<QuestionDtoReq> updateQuestion(@PathVariable Long id, @RequestBody QuestionDtoReq updatedQuestion) throws QuestionNotFoundExcepion {
+    public ResponseEntity<QuestionDtoRes> updateQuestion(@PathVariable Long id, @RequestBody QuestionDtoReq updatedQuestion) throws QuestionNotFoundExcepion {
         return new ResponseEntity<>(questionService.updateQuestion(id, updatedQuestion), HttpStatus.OK);
     }
 

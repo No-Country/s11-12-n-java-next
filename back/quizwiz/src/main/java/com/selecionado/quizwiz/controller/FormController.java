@@ -20,9 +20,8 @@ public class FormController {
 
 
     @PostMapping()
-    public ResponseEntity<HttpStatus> saveForm(@RequestBody FormDtoReq formDto){
-        formService.saveForm(formDto);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+    public ResponseEntity<FormDtoRes> saveForm(@RequestBody FormDtoReq formDto){
+        return new ResponseEntity<>(formService.saveForm(formDto), HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
@@ -36,9 +35,8 @@ public class FormController {
     }
 
     @PutMapping()
-    public ResponseEntity<HttpStatus> updateForm(@RequestBody FormDtoReq formDto) throws FormNotFoundException {
-        formService.updateForm(formDto);
-        return new ResponseEntity<>(HttpStatus.OK);
+    public ResponseEntity<FormDtoRes> updateForm(@RequestBody FormDtoReq formDto) throws FormNotFoundException {
+        return new ResponseEntity<>(formService.updateForm(formDto), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")

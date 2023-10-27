@@ -43,17 +43,17 @@ public class QuestionServiceImpl implements IQuestionService{
 	}
 
 	@Override
-	public QuestionDtoReq createQuestion(QuestionDtoReq questionDto) {
-        questionRepository.save(modelMapper.map(questionDto, Question.class));
-		return questionDto;
+	public QuestionDtoRes createQuestion(QuestionDtoReq questionDto) {
+        var question = questionRepository.save(modelMapper.map(questionDto, Question.class));
+		return modelMapper.map(question, QuestionDtoRes.class);
 	}
 
 	@Override
-	public QuestionDtoReq updateQuestion(Long id, QuestionDtoReq updatedQuestionDto) throws QuestionNotFoundExcepion {
+	public QuestionDtoRes updateQuestion(Long id, QuestionDtoReq updatedQuestionDto) throws QuestionNotFoundExcepion {
         if (questionRepository.existsById(id)) {
             updatedQuestionDto.setId(id);
-			questionRepository.save(modelMapper.map(updatedQuestionDto, Question.class));
-			return updatedQuestionDto;
+			var question = questionRepository.save(modelMapper.map(updatedQuestionDto, Question.class));
+			return modelMapper.map(question, QuestionDtoRes.class);
         }
         throw new QuestionNotFoundExcepion("El id de La pregunta no se encuentra registrada");
 	}

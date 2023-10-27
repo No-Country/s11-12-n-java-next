@@ -1,6 +1,7 @@
 package com.selecionado.quizwiz.controller;
 
 import com.selecionado.quizwiz.dto.request.OptionDtoReq;
+import com.selecionado.quizwiz.dto.response.OptionDtoRes;
 import com.selecionado.quizwiz.model.Option;
 import com.selecionado.quizwiz.service.IOptionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,7 @@ public class OptionController {
 
 
     @PostMapping()
-    public ResponseEntity<Option> saveOption(@RequestBody OptionDtoReq optionDto){
+    public ResponseEntity<OptionDtoRes> saveOption(@RequestBody OptionDtoReq optionDto){
         return new ResponseEntity<>(optionService.saveOption(optionDto), HttpStatus.CREATED);
     }
 
@@ -34,7 +35,7 @@ public class OptionController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Option> updateOption(@PathVariable Long id, @RequestBody OptionDtoReq option){
+    public ResponseEntity<OptionDtoRes> updateOption(@PathVariable Long id, @RequestBody OptionDtoReq option){
         return ResponseEntity.ok(optionService.updateOption(option, id));
     }
 

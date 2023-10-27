@@ -30,7 +30,7 @@ public class UserServiceImpl implements IUserService{
 	private ModelMapper modelMapper;
 
 	@Override
-	public void saveUser(UserDtoReq userDTO) throws ExistsEmailException, ConfirmPasswordException, UserIDNotFoundException {
+	public UserDTORes saveUser(UserDtoReq userDTO) throws ExistsEmailException, ConfirmPasswordException, UserIDNotFoundException {
 
 		var role = roleRepository.findByRolename("USER")
 				.orElseThrow(() -> new UserIDNotFoundException("Debe crear los roles de usuario"));
@@ -40,7 +40,8 @@ public class UserServiceImpl implements IUserService{
 		user.setRole(role);
 		user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
 
-		userRepository.save(user);
+		var userReturn = userRepository.save(user);
+		return modelMapper.map(userReturn, UserDTORes.class);
 	}
 
 	@Override
@@ -51,13 +52,14 @@ public class UserServiceImpl implements IUserService{
 	}
 
 	@Override
-	public void updateUser(UserDtoReq userDTO) throws UserIDNotFoundException, ExistsEmailException, ConfirmPasswordException {
+	public UserDTORes updateUser(UserDtoReq userDTO) throws UserIDNotFoundException, ExistsEmailException, ConfirmPasswordException {
 		var user = userRepository.findById(userDTO.getId())
 				.orElseThrow(() -> new UserIDNotFoundException("El id " + userDTO + " no existe." ));
 		this.userUpdateValidation(userDTO, user);
 		var saveUser = modelMapper.map(userDTO, User.class);
 		saveUser.setPassword(passwordEncoder.encode(user.getPassword()));
-		userRepository.save(saveUser);
+		var userReturn = userRepository.save(saveUser);
+		return modelMapper.map(userReturn, UserDTORes.class);
 	}
 
 	@Override

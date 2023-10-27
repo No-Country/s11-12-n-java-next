@@ -1,6 +1,7 @@
 package com.selecionado.quizwiz.service;
 
 import com.selecionado.quizwiz.dto.request.OptionDtoReq;
+import com.selecionado.quizwiz.dto.response.OptionDtoRes;
 import com.selecionado.quizwiz.model.Option;
 import com.selecionado.quizwiz.repository.IOptionRepository;
 import org.modelmapper.ModelMapper;
@@ -24,9 +25,9 @@ public class OptionServiceImpl implements IOptionService{
     }
 
     @Override
-    public Option saveOption(OptionDtoReq optionDtoReq) {
+    public OptionDtoRes saveOption(OptionDtoReq optionDtoReq) {
         Option option = modelMapper.map(optionDtoReq, Option.class);
-        return optionRepository.save(option);
+        return modelMapper.map(optionRepository.save(option), OptionDtoRes.class);
     }
 
     @Override
@@ -35,13 +36,13 @@ public class OptionServiceImpl implements IOptionService{
     }
 
     @Override
-    public Option updateOption(OptionDtoReq optionDtoReq, Long id) {
+    public OptionDtoRes updateOption(OptionDtoReq optionDtoReq, Long id) {
         Optional<Option> optionalOption = optionRepository.findById(id);
         if (!optionalOption.isPresent()) {
             throw new RuntimeException("Option no encontrado");
         }
         Option optionUpdate = modelMapper.map(optionDtoReq, Option.class);
-        return optionRepository.save(optionUpdate);
+        return modelMapper.map(optionRepository.save(optionUpdate), OptionDtoRes.class);
     }
 
     @Override

@@ -13,9 +13,9 @@ public interface IQuestionService {
 
 	QuestionDtoRes getQuestionById(Long id) throws QuestionNotFoundExcepion;
 
-	QuestionDtoReq createQuestion(QuestionDtoReq questionDto);
+	QuestionDtoRes createQuestion(QuestionDtoReq questionDto);
 
-	QuestionDtoReq updateQuestion(Long id, QuestionDtoReq updatedQuestionDto) throws QuestionNotFoundExcepion;
+	QuestionDtoRes updateQuestion(Long id, QuestionDtoReq updatedQuestionDto) throws QuestionNotFoundExcepion;
 
 	void deleteQuestion(Long id);
 

@@ -9,11 +9,11 @@ import com.selecionado.quizwiz.exceptions.UserIDNotFoundException;
 
 public interface IUserService {
 
-	void saveUser(UserDtoReq userDTO) throws ExistsEmailException, ConfirmPasswordException, UserIDNotFoundException;
+	UserDTORes saveUser(UserDtoReq userDTO) throws ExistsEmailException, ConfirmPasswordException, UserIDNotFoundException;
 
 	UserDTORes getUserById(Long id) throws UserIDNotFoundException;
 
-	void updateUser(UserDtoReq userDTO) throws UserIDNotFoundException, ExistsEmailException, ConfirmPasswordException;
+	UserDTORes updateUser(UserDtoReq userDTO) throws UserIDNotFoundException, ExistsEmailException, ConfirmPasswordException;
 
 	void deleteUser(Long id);
 }

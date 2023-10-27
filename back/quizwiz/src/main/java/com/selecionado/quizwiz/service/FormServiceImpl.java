@@ -2,6 +2,7 @@ package com.selecionado.quizwiz.service;
 
 import com.selecionado.quizwiz.dto.request.FormDtoReq;
 import com.selecionado.quizwiz.dto.response.FormDtoRes;
+import com.selecionado.quizwiz.dto.response.UserDTORes;
 import com.selecionado.quizwiz.exceptions.FormNotFoundException;
 import com.selecionado.quizwiz.model.Form;
 import com.selecionado.quizwiz.repository.IFormRepository;
@@ -25,8 +26,9 @@ public class FormServiceImpl implements IFormService{
     private ModelMapper modelMapper;
 
     @Override
-    public void saveForm(FormDtoReq formDto) {
-        formRepository.save(modelMapper.map(formDto, Form.class));
+    public FormDtoRes saveForm(FormDtoReq formDto) {
+        var form = formRepository.save(modelMapper.map(formDto, Form.class));
+        return modelMapper.map(form, FormDtoRes.class);
     }
 
     @Override
@@ -48,11 +50,12 @@ public class FormServiceImpl implements IFormService{
     }
 
     @Override
-    public void updateForm(FormDtoReq formDto) throws FormNotFoundException {
+    public FormDtoRes updateForm(FormDtoReq formDto) throws FormNotFoundException {
         if(formRepository.existsById(formDto.getId())){
             throw new FormNotFoundException("El formulario no se encuentra registrado");
         }
-        formRepository.save(modelMapper.map(formDto, Form.class));
+        var form = formRepository.save(modelMapper.map(formDto, Form.class));
+        return modelMapper.map(form, FormDtoRes.class);
     }
 
     @Override
