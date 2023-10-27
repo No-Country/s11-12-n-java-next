@@ -27,9 +27,8 @@ public class UserController {
 	private IUserService userService;
 	
 	@PostMapping("/registro")
-	public ResponseEntity<HttpStatus> saveUser(@RequestBody UserDtoReq userDTO) throws ExistsEmailException, ConfirmPasswordException, UserIDNotFoundException {
-		userService.saveUser(userDTO);
-		return new ResponseEntity<>(HttpStatus.CREATED);
+	public ResponseEntity<UserDTORes> saveUser(@RequestBody UserDtoReq userDTO) throws ExistsEmailException, ConfirmPasswordException, UserIDNotFoundException {
+		return new ResponseEntity<>(userService.saveUser(userDTO), HttpStatus.CREATED);
 	}
 	
 	@GetMapping("/{id}")
@@ -38,9 +37,8 @@ public class UserController {
 	}
 	
 	@PutMapping()
-	public ResponseEntity<HttpStatus> updateUser(@RequestBody UserDtoReq userDTO) throws UserIDNotFoundException, ExistsEmailException, ConfirmPasswordException{
-		userService.updateUser(userDTO);
-		return new ResponseEntity<>(HttpStatus.OK);
+	public ResponseEntity<UserDTORes> updateUser(@RequestBody UserDtoReq userDTO) throws UserIDNotFoundException, ExistsEmailException, ConfirmPasswordException{
+		return new ResponseEntity<>(userService.updateUser(userDTO), HttpStatus.OK);
 	}
 	
 	@DeleteMapping("/{id}")
