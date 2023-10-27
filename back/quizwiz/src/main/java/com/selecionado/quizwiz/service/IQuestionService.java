@@ -3,14 +3,15 @@ package com.selecionado.quizwiz.service;
 import java.util.List;
 
 import com.selecionado.quizwiz.dto.request.QuestionDtoReq;
+import com.selecionado.quizwiz.dto.response.QuestionDtoRes;
 import com.selecionado.quizwiz.exceptions.QuestionNotFoundExcepion;
 import com.selecionado.quizwiz.model.Question;
 
 public interface IQuestionService {
 
-	List<Question> getAllQuestions();
+	List<QuestionDtoRes> getAllQuestions();
 
-	Question getQuestionById(Long id) throws QuestionNotFoundExcepion;
+	QuestionDtoRes getQuestionById(Long id) throws QuestionNotFoundExcepion;
 
 	QuestionDtoReq createQuestion(QuestionDtoReq questionDto);
 

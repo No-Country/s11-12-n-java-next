@@ -7,8 +7,9 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class AuthResponseDtoRes {
-    private String token;
-    private String email;
-    private String fullname;
+public class OptionDtoRes {
+
+    private Long id;
+    private String label;
+    private boolean isSelected;
 }

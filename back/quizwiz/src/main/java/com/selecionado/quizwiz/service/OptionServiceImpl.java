@@ -26,8 +26,7 @@ public class OptionServiceImpl implements IOptionService{
     @Override
     public Option saveOption(OptionDtoReq optionDtoReq) {
         Option option = modelMapper.map(optionDtoReq, Option.class);
-        optionRepository.save(option);
-        return option;
+        return optionRepository.save(option);
     }
 
     @Override
