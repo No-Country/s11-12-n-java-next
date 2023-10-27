@@ -1,11 +1,15 @@
 package com.selecionado.quizwiz.service;
 
 import com.selecionado.quizwiz.dto.request.FormDtoReq;
+import com.selecionado.quizwiz.dto.request.MemberDtoReq;
 import com.selecionado.quizwiz.dto.response.FormDtoRes;
 import com.selecionado.quizwiz.dto.response.UserDTORes;
 import com.selecionado.quizwiz.exceptions.FormNotFoundException;
+import com.selecionado.quizwiz.exceptions.UserIDNotFoundException;
 import com.selecionado.quizwiz.model.Form;
+import com.selecionado.quizwiz.model.User;
 import com.selecionado.quizwiz.repository.IFormRepository;
+import com.selecionado.quizwiz.repository.IUserRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -21,14 +25,24 @@ public class FormServiceImpl implements IFormService{
 
     @Autowired
     private IFormRepository formRepository;
-
+    @Autowired
+    private IUserRepository userRepository;
     @Autowired
     private ModelMapper modelMapper;
 
     @Override
-    public FormDtoRes saveForm(FormDtoReq formDto) {
-        var form = formRepository.save(modelMapper.map(formDto, Form.class));
-        return modelMapper.map(form, FormDtoRes.class);
+    public FormDtoRes saveForm(FormDtoReq formDto) throws UserIDNotFoundException {
+        var users = new ArrayList<User>();
+        for (MemberDtoReq member : formDto.getMembers()){
+           users.add(userRepository.findByEmail(member.getEmail())
+                    .orElseThrow(() -> new UserIDNotFoundException("El miembro " + member.getEmail() + " debe estar registrado.")));
+        }
+
+        var form = modelMapper.map(formDto, Form.class);
+        form.setMembers(users);
+        formRepository.save(form);
+        formDto.setId(form.getId());
+        return modelMapper.map(formDto, FormDtoRes.class);
     }
 
     @Override
