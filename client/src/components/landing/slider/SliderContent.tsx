@@ -17,7 +17,7 @@ const SliderContent = ({ currentSlider }: Props) => {
             currentSlider !== index ? "hidden" : ""
           }`}
         >
-          <Image src={slide.image.src} alt={slide.image.alt} />
+          <Image src={slide.image.src} alt={slide.image.alt} priority />
           <p
             className={`text-center text-2xl px-4 ${
               currentSlider === 0 ? "font-light" : ""

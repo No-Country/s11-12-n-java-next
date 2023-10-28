@@ -10,7 +10,7 @@ import { EyeSlashFilledIcon } from "../ui/EyeSlashFilledIcon";
 import Link from "next/link";
 import Button from "../ui/button/Button";
 import { useState } from "react";
-import { loginService } from "@/services/auth.service";
+import useSession from "@/hooks/useSession";
 import { useRouter } from "next/navigation";
 
 type Inputs = {
@@ -19,6 +19,7 @@ type Inputs = {
 };
 
 export default function FormLogin() {
+  const { handleLogin } = useSession();
   const router = useRouter();
   const [isVisible, setIsVisible] = useState(false);
 
@@ -36,7 +37,7 @@ export default function FormLogin() {
 
   const onSubmit: SubmitHandler<Passport> = async (data) => {
     console.log(data);
-    const res = await loginService(data);
+    const res = await handleLogin(data);
     res.resolved ? router.push("/dashboard") : console.log(res.payload);
     //! ver modal
   };
@@ -44,7 +45,13 @@ export default function FormLogin() {
   return (
     <>
       <div className="flex flex-col items-center">
-        <Image src={logo} alt="logo" height={169} priority />
+        <Image
+          src={logo}
+          alt="logo"
+          height={169}
+          priority
+          className=" h-auto"
+        />
         <h1 className="text-teal-700 font-bold text-3xl">¡Hola de nuevo!</h1>
         <p className="text-zinc-600 font-light text-sm">
           !Nos alegramos mucho de volver a verte!

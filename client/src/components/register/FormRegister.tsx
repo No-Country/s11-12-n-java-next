@@ -37,7 +37,7 @@ export default function FormRegister() {
   return (
     <>
       <div className="flex h-screen flex-col p-5 items-center">
-        <Image src={logo} alt="logo" width={100} className="" />
+        <Image src={logo} alt="logo" width={100} className=" h-auto" />
         <div className="w-[346px] h-[113px] mt-10 ">
           <span className="text-zinc-600 text-2xl font-light">
             Bienvenido a{" "}
