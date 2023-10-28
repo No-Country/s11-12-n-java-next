@@ -11,7 +11,7 @@ interface Props {
     id: number;
     userName: string;
     email: string;
-    pending: boolean;
+    status: string;
   };
   quizId: string;
 }
@@ -23,15 +23,15 @@ export default function PendingQuizCardUser({ user, quizId }: Props) {
       shadow="sm"
       isPressable
       as={Link}
-      href={`/answer/${quizId}/${user.email}`}
+      href={`/answer/${quizId}/${user.userName}`}
     >
       <CardBody className="overflow-visible flex flex-row p-4">
         <div className="flex flex-col justify-center">
           <h2 className="font-black">{user.userName}</h2>
           <p className="text-xl font-light m-0">{user.email}</p>
         </div>
-        <div className="ml-auto flex">
-          {user.pending ? (
+        <div className="ml-auto flex w-12 h-12">
+          {user.status === "PENDING" ? (
             <Image src={PendingIcon} alt={"Pending Icon"} />
           ) : (
             <Image src={DoneIcon} alt={"Done Icon"} />

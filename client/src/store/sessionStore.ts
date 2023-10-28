@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import zukeeper from "zukeeper";
+
 type Store = {
   session: UserSession;
   setSession: (newSession: UserSession) => void;
@@ -7,7 +8,7 @@ type Store = {
 
 export const useSessionStore = create<Store>()(
   zukeeper((set: any) => ({
-    session: { fullName: "", email: "", token: "" },
+    session: { fullname: "", email: "", token: "" },
     setSession: (newSession: UserSession) =>
       set(() => ({ session: newSession })),
   }))

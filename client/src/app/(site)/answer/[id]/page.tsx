@@ -6,31 +6,31 @@ function FormView({ params }: { params: { id: string } }) {
       id: 1,
       userName: "Valesca Atenas",
       email: "valescaatenas@gmail.com",
-      pending: false,
+      status: "DONE",
     },
     {
       id: 2,
       userName: "Alan tello",
       email: "Alantello@gmail.com",
-      pending: true,
+      status: "PENDING",
     },
     {
       id: 3,
       userName: "Dhessy",
       email: "dhessy@gmail.com",
-      pending: true,
+      status: "PENDING",
     },
     {
       id: 4,
       userName: "Eynar Alvarez",
       email: "eynaralvarez@gmail.com",
-      pending: true,
+      status: "PENDING",
     },
     {
       id: 5,
       userName: "Andres frei",
       email: "andresfrei@gmail.com",
-      pending: true,
+      status: "PENDING",
     },
   ];
 
