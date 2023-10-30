@@ -3,6 +3,7 @@ package com.selecionado.quizwiz.service;
 import com.selecionado.quizwiz.dto.request.FormDtoReq;
 import com.selecionado.quizwiz.dto.request.MemberDtoReq;
 import com.selecionado.quizwiz.dto.response.FormDtoRes;
+import com.selecionado.quizwiz.dto.response.MemberFormDtoRes;
 import com.selecionado.quizwiz.dto.response.UserDTORes;
 import com.selecionado.quizwiz.exceptions.FormNotFoundException;
 import com.selecionado.quizwiz.exceptions.UserIDNotFoundException;
@@ -19,6 +20,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class FormServiceImpl implements IFormService{
@@ -31,18 +33,33 @@ public class FormServiceImpl implements IFormService{
     private ModelMapper modelMapper;
 
     @Override
-    public FormDtoRes saveForm(FormDtoReq formDto) throws UserIDNotFoundException {
+    public MemberFormDtoRes saveForm(FormDtoReq formDto) throws UserIDNotFoundException {
         var users = new ArrayList<User>();
-        for (MemberDtoReq member : formDto.getMembers()){
-           users.add(userRepository.findByEmail(member.getEmail())
-                    .orElseThrow(() -> new UserIDNotFoundException("El miembro " + member.getEmail() + " debe estar registrado.")));
-        }
+        var unregisteredUsers = new ArrayList<String>();
+        var returnMemberForm = new MemberFormDtoRes();
 
+        for (MemberDtoReq member : formDto.getMembers()){
+           var user = userRepository.findByEmail(member.getEmail());
+           if(user.isEmpty()){
+               unregisteredUsers.add(member.getEmail());
+           }else{
+               users.add(user.get());
+           }
+        }
         var form = modelMapper.map(formDto, Form.class);
         form.setMembers(users);
-        formRepository.save(form);
-        formDto.setId(form.getId());
-        return modelMapper.map(formDto, FormDtoRes.class);
+        var savedForm = formRepository.save(form);
+        returnMemberForm.setId(savedForm.getId());
+
+        if(unregisteredUsers.isEmpty()){
+            returnMemberForm.setMessage("El formulario ha sido guardado correctamente.");
+            return returnMemberForm;
+        }
+        else{
+            returnMemberForm.setMessage("Los siguientes emails no pudieron asignarse al formulario porque no se encuentran registrados en la plataforma.");
+            returnMemberForm.setEmails(unregisteredUsers);
+            return returnMemberForm;
+        }
     }
 
     @Override

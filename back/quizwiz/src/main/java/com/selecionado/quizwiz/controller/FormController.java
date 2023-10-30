@@ -3,6 +3,7 @@ package com.selecionado.quizwiz.controller;
 import com.selecionado.quizwiz.dto.request.FormDtoReq;
 import com.selecionado.quizwiz.dto.response.FormDtoRes;
 import com.selecionado.quizwiz.exceptions.FormNotFoundException;
+import com.selecionado.quizwiz.exceptions.UserIDNotFoundException;
 import com.selecionado.quizwiz.service.IFormService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -20,7 +21,7 @@ public class FormController {
 
 
     @PostMapping()
-    public ResponseEntity<FormDtoRes> saveForm(@RequestBody FormDtoReq formDto){
+    public ResponseEntity<FormDtoRes> saveForm(@RequestBody FormDtoReq formDto) throws UserIDNotFoundException {
         return new ResponseEntity<>(formService.saveForm(formDto), HttpStatus.CREATED);
     }
 
