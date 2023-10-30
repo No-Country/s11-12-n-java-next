@@ -5,6 +5,7 @@ import com.selecionado.quizwiz.dto.response.FormDtoRes;
 import com.selecionado.quizwiz.dto.response.UserDTORes;
 import com.selecionado.quizwiz.exceptions.FormNotFoundException;
 import com.selecionado.quizwiz.model.Form;
+import com.selecionado.quizwiz.model.User;
 import com.selecionado.quizwiz.repository.IFormRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,15 @@ public class FormServiceImpl implements IFormService{
     private ModelMapper modelMapper;
 
     @Override
-    public FormDtoRes saveForm(FormDtoReq formDto) {
+    public FormDtoRes saveForm(FormDtoReq formDto) { //TODO
+        /*public FormDtoRes saveForm(FormDtoReq formDto, List<User> members) {
+
+        var form = modelMapper.map(formDto, Form.class)
+        form.setMembers(members);
+
+
+        }*/
+
         var form = formRepository.save(modelMapper.map(formDto, Form.class));
         return modelMapper.map(form, FormDtoRes.class);
     }
