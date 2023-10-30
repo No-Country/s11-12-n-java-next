@@ -20,7 +20,8 @@ type ApiResponse = {
   payload: any;
 };
 
-interface UserSession extends Passport {
+interface UserSession extends Omit<Passport, "password"> {
+  isAuthenticated: boolean;
   token: string;
   fullname: string;
 }
