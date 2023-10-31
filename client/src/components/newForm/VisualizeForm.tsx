@@ -1,6 +1,6 @@
 import Link from "next/link";
 import NewFormLayout from "./NewFormLayout";
-import Button from "../button/Button";
+import Button from "../ui/button/Button";
 
 export default function VisualizeForm() {
   return (
