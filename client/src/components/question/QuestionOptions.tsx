@@ -1,5 +1,5 @@
 import { Input } from "@nextui-org/react";
-import Button from "../button/Button";
+import Button from "../ui/button/Button";
 import NewFormLayout from "../newForm/NewFormLayout";
 
 export default function QUestionOptions() {
