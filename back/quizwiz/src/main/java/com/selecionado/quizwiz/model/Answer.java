@@ -16,6 +16,7 @@ public class Answer {
     private Long id;
     private String answer;
     private Long idUserRes; //TODO ????
+    private boolean isSelected;
     @OneToOne
     private Question question;
     @ManyToOne
