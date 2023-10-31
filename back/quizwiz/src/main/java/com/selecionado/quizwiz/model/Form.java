@@ -32,5 +32,5 @@ public class Form {
     @OneToMany(mappedBy = "form")
     @JsonIgnoreProperties("form")
     private List<Question> questions;
-
+    private List<Team> teams;
 }

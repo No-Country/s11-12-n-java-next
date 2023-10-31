@@ -4,7 +4,6 @@ import com.selecionado.quizwiz.dto.request.FormDtoReq;
 import com.selecionado.quizwiz.dto.request.MemberDtoReq;
 import com.selecionado.quizwiz.dto.response.FormDtoRes;
 import com.selecionado.quizwiz.dto.response.MemberFormDtoRes;
-import com.selecionado.quizwiz.dto.response.UserDTORes;
 import com.selecionado.quizwiz.exceptions.FormNotFoundException;
 import com.selecionado.quizwiz.exceptions.UserIDNotFoundException;
 import com.selecionado.quizwiz.model.Form;
@@ -20,7 +19,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class FormServiceImpl implements IFormService{
@@ -39,6 +37,7 @@ public class FormServiceImpl implements IFormService{
         var returnMemberForm = new MemberFormDtoRes();
 
         for (MemberDtoReq member : formDto.getMembers()){
+
            var user = userRepository.findByEmail(member.getEmail());
            if(user.isEmpty()){
                unregisteredUsers.add(member.getEmail());

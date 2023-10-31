@@ -7,9 +7,11 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class MemberDtoReq {
+public class AnswerDtoReq {
+    private Long id;
+    private String answer;
+    private Long idQuestion;
+    private Long idAnsweredForm;
+    private Long idUserResponse;
 
-    private String fullName;
-    private String email;
-    private String team;
 }

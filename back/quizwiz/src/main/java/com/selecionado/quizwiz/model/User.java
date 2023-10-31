@@ -40,6 +40,9 @@ public class User implements UserDetails {
     @ManyToMany(mappedBy = "members")
     @JsonIgnoreProperties("membres")
     private List<Form> responseForms;
+    @ManyToOne
+    @JoinColumn( name = "idTeam")
+    private Team team;
 
 
     @Override

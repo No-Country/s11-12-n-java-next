@@ -7,9 +7,10 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class MemberDtoReq {
+public class AnsweredFormDtoReq {
 
-    private String fullName;
-    private String email;
-    private String team;
+    private Long id;
+    private Long idForm;
+    private Long IdQualifier;
+
 }
