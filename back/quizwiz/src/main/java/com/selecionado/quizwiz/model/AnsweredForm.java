@@ -24,7 +24,7 @@ public class AnsweredForm {
     @OneToOne
     private Form form;
 
-    @OneToMany(mappedBy = "AnsweredForm")
-    @JsonIgnoreProperties("AnsweredForm")
+    @OneToMany(mappedBy = "answeredForm")
+    @JsonIgnoreProperties("answeredForm")
     private List<Answer> answer;
 }
