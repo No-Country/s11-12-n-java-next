@@ -32,10 +32,10 @@ export default function FilterForms() {
     <ul className="flex flex-col gap-4">
       {teams.length > 0 
         ? teams.map(team => (
-          <li key={team.teamName}><Link href="#"><TeamCard organizationName={team.organizationName} teamName={team.teamName} state={team.state} /></Link></li>
+          <li key={team.teamName}><TeamCard teamId={team.id} organizationName={team.organizationName} teamName={team.teamName} state={team.state} /></li>
         ))
         : <p className="text-slate-500 text-center">No tienes cuestionarios creados. Empieza con uno.</p> }
     </ul>
-    <Link className="mx-auto" href="#"><Button isIconOnly size="lg" radius="full"color="primary" arial-label="Generate a new form">+</Button></Link>
+    <Link className="mx-auto" href="/quizz/new"><Button isIconOnly size="lg" radius="full"color="primary" arial-label="Generate a new form">+</Button></Link>
   </FormLayout>)
 }
