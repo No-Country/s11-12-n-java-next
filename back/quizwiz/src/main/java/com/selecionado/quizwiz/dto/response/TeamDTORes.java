@@ -1,6 +1,7 @@
-package com.selecionado.quizwiz.dto.request;
+package com.selecionado.quizwiz.dto.response;
 
-import jakarta.validation.constraints.NotNull;
+import com.selecionado.quizwiz.dto.request.FormDtoReq;
+import com.selecionado.quizwiz.dto.request.MemberDtoReq;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,11 +11,9 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class TeamDtoReq {
-    @NotNull(message = "no puede estar vacio")
+public class TeamDTORes {
+    private Long id;
     private String name;
-    @NotNull(message = "no puede estar vacio")
     private List<MemberDtoReq> members;
     private FormDtoReq form;
-
 }
