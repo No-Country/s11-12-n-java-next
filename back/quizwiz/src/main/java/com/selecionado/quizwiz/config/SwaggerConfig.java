@@ -19,7 +19,7 @@ public class SwaggerConfig {
     @Bean
     public OpenAPI fimaOpenAPI() {
         return new OpenAPI()
-                .addServersItem(new Server().url("https://vps-3685870-x.dattaweb.com"))
+                .addServersItem(new Server().url("/"))
                 .info(new Info().title("QuizWiz API")
                         .description("Aplicación de API Rest para la creacion de formularios de encuesta")
                         .version("v1.0.0")
