@@ -4,3 +4,7 @@ const API_URL_BASE =
 export const API_URL_REGISTER = API_URL_BASE + "/usuarios/registro";
 
 export const API_URL_LOGIN = API_URL_BASE + "/login";
+
+export const API_URL_FORM = API_URL_BASE + "/formularios"
+
+export const API_URL_QUESTION = API_URL_BASE + "/preguntas"
