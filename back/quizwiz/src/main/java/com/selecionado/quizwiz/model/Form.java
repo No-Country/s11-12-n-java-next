@@ -23,14 +23,9 @@ public class Form {
     @JoinColumn(name = "idCreator")
     @JsonIgnoreProperties("createdForms")
     private User creator;
-    @ManyToMany
-    @JoinTable( name = "forms_users",
-    joinColumns = @JoinColumn(name = "idForm"),
-    inverseJoinColumns = @JoinColumn(name = "idUser"))
-    @JsonIgnoreProperties("responseForms")
-    private List<User> members;
     @OneToMany(mappedBy = "form")
     @JsonIgnoreProperties("form")
     private List<Question> questions;
+    @OneToMany(mappedBy = "form")
     private List<Team> teams;
 }

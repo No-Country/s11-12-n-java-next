@@ -36,29 +36,29 @@ public class FormServiceImpl implements IFormService{
         var unregisteredUsers = new ArrayList<String>();
         var returnMemberForm = new MemberFormDtoRes();
 
-        for (MemberDtoReq member : formDto.getMembers()){
-
-           var user = userRepository.findByEmail(member.getEmail());
-           if(user.isEmpty()){
-               unregisteredUsers.add(member.getEmail());
-           }else{
-               users.add(user.get());
-           }
-        }
-        var form = modelMapper.map(formDto, Form.class);
-        form.setMembers(users);
-        var savedForm = formRepository.save(form);
-        returnMemberForm.setId(savedForm.getId());
-
-        if(unregisteredUsers.isEmpty()){
-            returnMemberForm.setMessage("El formulario ha sido guardado correctamente.");
+//        for (MemberDtoReq member : formDto.getMembers()){
+//
+//           var user = userRepository.findByEmail(member.getEmail());
+//           if(user.isEmpty()){
+//               unregisteredUsers.add(member.getEmail());
+//           }else{
+//               users.add(user.get());
+//           }
+//        }
+//        var form = modelMapper.map(formDto, Form.class);
+//        form.setMembers(users);
+//        var savedForm = formRepository.save(form);
+//        returnMemberForm.setId(savedForm.getId());
+//
+//        if(unregisteredUsers.isEmpty()){
+//            returnMemberForm.setMessage("El formulario ha sido guardado correctamente.");
+//            return returnMemberForm;
+//        }
+//        else{
+//            returnMemberForm.setMessage("Los siguientes emails no pudieron asignarse al formulario porque no se encuentran registrados en la plataforma.");
+//            returnMemberForm.setEmails(unregisteredUsers);
             return returnMemberForm;
-        }
-        else{
-            returnMemberForm.setMessage("Los siguientes emails no pudieron asignarse al formulario porque no se encuentran registrados en la plataforma.");
-            returnMemberForm.setEmails(unregisteredUsers);
-            return returnMemberForm;
-        }
+//        }
     }
 
     @Override

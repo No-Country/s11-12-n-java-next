@@ -6,15 +6,14 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class FormDtoReq {
+public class TeamDtoReq {
 
     private Long id;
-    private String title;
-    private String description;
-    private UserDtoReq creator;
-    private List<TeamDtoReq> team;
+    private String name;
+    private List<MemberDtoReq> members;
+    private FormDtoReq form;
+
 }

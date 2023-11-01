@@ -10,7 +10,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity(name="teams")
+@Entity(name = "teams")
 public class Team {
 
     @Id
@@ -19,4 +19,8 @@ public class Team {
     private String name;
     @OneToMany(mappedBy = "team")
     private List<User> members;
+    @ManyToOne
+    @JoinColumn(name = "idForm")
+    private Form form;
+
 }
