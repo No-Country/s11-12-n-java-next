@@ -38,3 +38,26 @@ interface RegisterData extends Passport {
 interface Window {
   store: ReturnType<typeof useSessionStore>;
 }
+
+interface Options {
+  label: string;
+  selected: boolean;
+}
+
+interface Question {
+  question: string;
+  answer?: string;
+  options?: Options[];
+}
+
+interface Member {
+  fullName: string;
+  email: string;
+}
+
+interface FormSchema {
+  title: string;
+  description: string;
+  questions?: Question[];
+  members?: Member[];
+}
