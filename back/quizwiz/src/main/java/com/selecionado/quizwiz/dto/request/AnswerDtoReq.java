@@ -10,8 +10,8 @@ import lombok.NoArgsConstructor;
 public class AnswerDtoReq {
     private Long id;
     private String answer;
-    private Long idQuestion;
-    private Long idAnsweredForm;
-    private Long idUserResponse;
+    private QuestionDtoReq question;
+    private AnsweredFormDtoReq answeredForm;
+    private UserDtoReq userResponse;
 
 }

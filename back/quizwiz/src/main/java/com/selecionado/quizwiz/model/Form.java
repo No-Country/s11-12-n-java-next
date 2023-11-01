@@ -27,5 +27,6 @@ public class Form {
     @JsonIgnoreProperties("form")
     private List<Question> questions;
     @OneToMany(mappedBy = "form")
+    @JsonIgnoreProperties("form")
     private List<Team> teams;
 }

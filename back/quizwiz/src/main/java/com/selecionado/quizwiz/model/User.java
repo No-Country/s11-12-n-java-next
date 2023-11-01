@@ -39,6 +39,7 @@ public class User implements UserDetails {
     private List<Form> createdForms;
     @ManyToOne
     @JoinColumn( name = "idTeam")
+    @JsonIgnoreProperties("members")
     private Team team;
 
 
