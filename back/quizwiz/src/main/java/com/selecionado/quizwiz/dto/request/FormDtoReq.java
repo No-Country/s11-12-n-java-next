@@ -16,5 +16,4 @@ public class FormDtoReq {
     private String title;
     private String description;
     private UserDtoReq creator;
-    private List<TeamDtoReq> team;
 }

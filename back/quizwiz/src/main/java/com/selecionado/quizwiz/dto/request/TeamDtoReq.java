@@ -1,5 +1,6 @@
 package com.selecionado.quizwiz.dto.request;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,5 +17,4 @@ public class TeamDtoReq {
     @NotNull(message = "no puede estar vacio")
     private List<MemberDtoReq> members;
     private FormDtoReq form;
-
 }
