@@ -1,15 +1,14 @@
 "use client";
 
 import { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
+import Image from "next/image";
 import { Input, Select, SelectItem } from "@nextui-org/react";
 
-import TextIcon from "@/assets/icons/text.svg"
+import NewFormLayout from "../newForm/NewFormLayout";
 import SimpleIcon from "@/assets/icons/circle-outline.svg"
+import TextIcon from "@/assets/icons/text.svg"
 import MultipleIcon from "@/assets/icons/multiple-select.svg"
 import StarIcon from "@/assets/icons/star.svg"
-import DateIcon from "@/assets/icons/.svg"
-import NewFormLayout from "../newForm/NewFormLayout";
-import Image from "next/image";
 
 export default function NewQuestion({
   questionTitle,
@@ -87,7 +86,6 @@ export default function NewQuestion({
             </SelectItem>
           ))}
         </Select>
-        <p className="text-small text-default-500">Selected: {value}</p>
       </div>
     </NewFormLayout>
   );
