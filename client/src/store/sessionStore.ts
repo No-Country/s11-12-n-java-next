@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { persist, createJSONStorage } from "zustand/middleware";
 import zukeeper from "zukeeper";
 
 type Store = {
@@ -7,11 +8,18 @@ type Store = {
 };
 
 export const useSessionStore = create<Store>()(
-  zukeeper((set: any) => ({
-    session: { fullname: "", email: "", token: "" },
-    setSession: (newSession: UserSession) =>
-      set(() => ({ session: newSession })),
-  }))
+  persist(
+    zukeeper((set: any) => ({
+      session: { fullname: "", email: "", token: "", isAuthenticated: false },
+      setSession: (newSession: UserSession) =>
+        set(() => ({ session: newSession })),
+    })),
+    {
+      name: "user-storage",
+      storage: createJSONStorage(() => sessionStorage),
+      partialize: (state) => ({ session: state.session }),
+    }
+  )
 );
 
 if (typeof window !== "undefined") {
