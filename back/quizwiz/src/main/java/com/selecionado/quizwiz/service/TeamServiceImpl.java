@@ -33,7 +33,9 @@ public class TeamServiceImpl implements ITeamService{
 
     @Override
     public TeamDTORes create(TeamDtoReq teamDtoReq) {
-        teamRepository.findByName().orElseThrow(() -> new TeamNameExistsException("El equipo con nombre " + teamDtoReq.getName() + " ya existe en base de datos"));
+        if (teamRepository.existsByName(teamDtoReq.getName())) {
+        throw new TeamNameExistsException("El equipo con nombre " + teamDtoReq.getName() + " ya existe en base de datos");
+        }
         Team team = teamRepository.save(modelMapper.map(teamDtoReq, Team.class));
         return modelMapper.map(team, TeamDTORes.class);
     }
