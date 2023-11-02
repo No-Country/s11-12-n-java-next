@@ -7,7 +7,7 @@ import com.selecionado.quizwiz.model.Answer;
 import java.util.List;
 
 public interface IAnswerService {
-    Answer findByIdAnswer(Long id);
+    AnswerDtoRes findByIdAnswer(Long id);
     AnswerDtoRes saveAnswer(AnswerDtoReq answerDtoReq);
     AnswerDtoRes updateAnswer(AnswerDtoReq answerDtoReq, Long id);
     void deleteAnswer(Long id);

@@ -15,5 +15,4 @@ public class TeamDTORes {
     private Long id;
     private String name;
     private List<MemberDtoReq> members;
-    private FormDtoReq form;
 }

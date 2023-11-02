@@ -4,13 +4,10 @@ import com.selecionado.quizwiz.dto.request.MemberDtoReq;
 import com.selecionado.quizwiz.dto.request.TeamDtoReq;
 import com.selecionado.quizwiz.dto.response.MemberFormDtoRes;
 import com.selecionado.quizwiz.dto.response.TeamDTORes;
-import com.selecionado.quizwiz.exceptions.FormNotFoundException;
 import com.selecionado.quizwiz.exceptions.TeamNameExistsException;
 import com.selecionado.quizwiz.exceptions.TeamNotFoundException;
-import com.selecionado.quizwiz.model.Form;
 import com.selecionado.quizwiz.model.Team;
 import com.selecionado.quizwiz.model.User;
-import com.selecionado.quizwiz.repository.IFormRepository;
 import com.selecionado.quizwiz.repository.ITeamRepository;
 import com.selecionado.quizwiz.repository.IUserRepository;
 import org.modelmapper.ModelMapper;
@@ -43,7 +40,7 @@ public class TeamServiceImpl implements ITeamService{
     }
 
     @Override
-    public MemberFormDtoRes create(TeamDtoReq teamDtoReq) throws FormNotFoundException {
+    public MemberFormDtoRes create(TeamDtoReq teamDtoReq) {
         if (teamRepository.existsByName(teamDtoReq.getName())) {
         throw new TeamNameExistsException("El equipo con nombre " + teamDtoReq.getName() + " ya existe en base de datos");
         }

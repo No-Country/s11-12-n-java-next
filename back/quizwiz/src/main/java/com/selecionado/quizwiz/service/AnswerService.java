@@ -21,8 +21,9 @@ public class AnswerService implements IAnswerService{
     ModelMapper modelMapper;
 
     @Override
-    public Answer findByIdAnswer(Long id){
-        return answerRepository.findById(id).orElseThrow(() -> new RuntimeException("Respuesta No encontrada"));
+    public AnswerDtoRes findByIdAnswer(Long id){
+        return modelMapper.map(answerRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Respuesta No encontrada")), AnswerDtoRes.class);
     }
 
     @Override

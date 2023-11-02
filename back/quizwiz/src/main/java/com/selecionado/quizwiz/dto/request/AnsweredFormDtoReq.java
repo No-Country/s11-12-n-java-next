@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 public class AnsweredFormDtoReq {
 
     private Long id;
-    private Long idForm;
-    private Long IdQualifier;
+    private FormDtoReq form;
+    private UserDtoReq user;
 
 }
