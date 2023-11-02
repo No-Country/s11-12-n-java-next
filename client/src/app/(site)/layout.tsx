@@ -10,15 +10,17 @@ export default function FormsLayout({
 }) {
   return (
     <section className="h-[100dvh] w-[100dvw] p-4">
-      <header className="m-auto h-28 relative">
-        <BackButton />
+      <header className="flex h-28 relative">
+        <div>
+          <BackButton />
+          <Avatar />
+        </div>
         <Image
           src={logo}
           priority
           alt="Quizwiz logo"
           className="m-auto w-[127px] h-auto"
         />
-        <Avatar />
       </header>
       {children}
     </section>
