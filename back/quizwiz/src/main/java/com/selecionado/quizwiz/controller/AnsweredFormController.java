@@ -3,6 +3,7 @@ package com.selecionado.quizwiz.controller;
 import com.selecionado.quizwiz.dto.request.AnsweredFormDtoReq;
 import com.selecionado.quizwiz.dto.response.AnsweredFormDtoRes;
 import com.selecionado.quizwiz.service.IAnsweredFormService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +14,7 @@ import java.util.List;
 @RequestMapping("api/v1/formularios_contestados")
 public class AnsweredFormController {
 
+    @Autowired
     private IAnsweredFormService answeredFormService;
 
 

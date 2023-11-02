@@ -18,8 +18,13 @@ public class Team {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    @OneToMany(mappedBy = "team")
-    @JsonIgnoreProperties("team")
+    @ManyToMany
+    @JoinTable(
+            name = "members_teams",
+            joinColumns = @JoinColumn(name = "id_teams"),
+            inverseJoinColumns = @JoinColumn(name = "id_member")
+    )
+    @JsonIgnoreProperties("teams")
     private List<User> members;
     @ManyToOne
     @JoinColumn(name = "idForm")

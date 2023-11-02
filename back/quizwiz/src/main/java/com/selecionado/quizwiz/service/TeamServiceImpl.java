@@ -3,7 +3,8 @@ package com.selecionado.quizwiz.service;
 import com.selecionado.quizwiz.dto.request.MemberDtoReq;
 import com.selecionado.quizwiz.dto.request.TeamDtoReq;
 import com.selecionado.quizwiz.dto.response.MemberFormDtoRes;
-import com.selecionado.quizwiz.dto.response.TeamDTORes;
+import com.selecionado.quizwiz.dto.response.SaveTeamDTORes;
+import com.selecionado.quizwiz.dto.response.TeamDtoRes;
 import com.selecionado.quizwiz.exceptions.TeamNameExistsException;
 import com.selecionado.quizwiz.exceptions.TeamNotFoundException;
 import com.selecionado.quizwiz.model.Team;
@@ -29,14 +30,14 @@ public class TeamServiceImpl implements ITeamService{
     private IUserRepository userRepository;
 
     @Override
-    public List<TeamDTORes> getAllTeams() {
-        return teamRepository.findAll().stream().map(team -> modelMapper.map(team, TeamDTORes.class)).collect(Collectors.toList());
+    public List<TeamDtoRes> getAllTeams() {
+        return teamRepository.findAll().stream().map(team -> modelMapper.map(team, TeamDtoRes.class)).collect(Collectors.toList());
     }
 
     @Override
-    public TeamDTORes getTeamById(Long id) {
+    public TeamDtoRes getTeamById(Long id) {
         Team team = teamRepository.findById(id).orElseThrow(() -> new TeamNotFoundException("El equipo con id " + id + " no fue encontrado en la base de datos"));
-        return modelMapper.map(team, TeamDTORes.class);
+        return modelMapper.map(team, TeamDtoRes.class);
     }
 
     @Override
@@ -70,12 +71,12 @@ public class TeamServiceImpl implements ITeamService{
     }
 
     @Override
-    public TeamDTORes update(Long id, TeamDtoReq teamDtoReq) {
+    public SaveTeamDTORes update(Long id, TeamDtoReq teamDtoReq) {
         teamRepository.findById(id).orElseThrow(() -> new TeamNotFoundException("El equipo con id " + id + " no fue encontrado en la base de datos"));
         Team teamRequest = modelMapper.map(teamDtoReq, Team.class);
         teamRequest.setId(id);
         Team teamSaved = teamRepository.save(teamRequest);
-        return modelMapper.map(teamSaved, TeamDTORes.class);
+        return modelMapper.map(teamSaved, SaveTeamDTORes.class);
     }
 
     @Override

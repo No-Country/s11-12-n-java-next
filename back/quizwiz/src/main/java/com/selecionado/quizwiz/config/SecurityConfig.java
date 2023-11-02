@@ -36,7 +36,7 @@ public class SecurityConfig {
                                 "/api/v1/formularios/**",
                                 "/api/v1/opciones/**",
                                 "/api/v1/equipos/**",
-                                "/api/v1/formularios_respondidos/**").hasAnyRole("USER", "ADMIN"))
+                                "/api/v1/formularios_contestados/**").hasAnyRole("USER", "ADMIN"))
                 .authorizeHttpRequests(auth ->
                         auth.requestMatchers(
                                 "/api/v1/roles/**").hasRole( "ADMIN"))

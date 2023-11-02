@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 public class AnswerDtoReq {
     private Long id;
     private String answer;
+    private boolean isSelected;
     private QuestionDtoReq question;
     private AnsweredFormDtoReq answeredForm;
     private UserDtoReq userResponse;

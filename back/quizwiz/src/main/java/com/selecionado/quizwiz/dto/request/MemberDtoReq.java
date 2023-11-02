@@ -11,5 +11,4 @@ public class MemberDtoReq {
 
     private String fullName;
     private String email;
-    private String team;
 }

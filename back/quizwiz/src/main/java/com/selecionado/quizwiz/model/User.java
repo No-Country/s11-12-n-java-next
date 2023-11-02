@@ -37,10 +37,9 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "creator")
     @JsonIgnoreProperties("creator")
     private List<Form> createdForms;
-    @ManyToOne
-    @JoinColumn( name = "idTeam")
+    @ManyToMany(mappedBy = "members")
     @JsonIgnoreProperties("members")
-    private Team team;
+    private List<Team> teams;
 
 
     @Override

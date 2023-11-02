@@ -1,6 +1,5 @@
 package com.selecionado.quizwiz.dto.response;
 
-import com.selecionado.quizwiz.dto.request.FormDtoReq;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,9 +9,8 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class QuestionDtoRes {
-
+public class TeamDtoRes {
     private Long id;
-    private String question;
-    private List<OptionDtoRes> options;
+    private String name;
+    private List<UserDTORes> members;
 }
