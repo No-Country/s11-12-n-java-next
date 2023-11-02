@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -31,9 +32,14 @@ public class User implements UserDetails {
     private Boolean enabled;
     @ManyToOne
     @JoinColumn(name = "idRole")
+    @JsonIgnoreProperties("users")
     private Role role;
-    @OneToMany(mappedBy = "user")
-    private Form form;
+    @OneToMany(mappedBy = "creator")
+    @JsonIgnoreProperties("creator")
+    private List<Form> createdForms;
+    @ManyToMany(mappedBy = "members")
+    @JsonIgnoreProperties("members")
+    private List<Team> teams;
 
 
     @Override

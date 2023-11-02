@@ -2,6 +2,7 @@ package com.selecionado.quizwiz.model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -22,6 +23,7 @@ public class Role {
 	private Long id;
 	private String rolename;
 	@OneToMany(mappedBy = "role")
+	@JsonIgnoreProperties("role")
 	private List<User> users;
 
 }

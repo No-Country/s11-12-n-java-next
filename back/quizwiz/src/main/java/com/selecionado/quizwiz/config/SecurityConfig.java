@@ -1,10 +1,10 @@
 package com.selecionado.quizwiz.config;
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -30,10 +30,16 @@ public class SecurityConfig {
                         .permitAll())
                 .authorizeHttpRequests(auth ->
                         auth.requestMatchers(
-                                        "/api/v1/usuarios").hasAnyRole("USER", "ADMIN"))
+                                        "/api/v1/usuarios/**",
+                                "/api/v1/preguntas/**",
+                                "/api/v1/respuestas/**",
+                                "/api/v1/formularios/**",
+                                "/api/v1/opciones/**",
+                                "/api/v1/equipos/**",
+                                "/api/v1/formularios_contestados/**").hasAnyRole("USER", "ADMIN"))
                 .authorizeHttpRequests(auth ->
                         auth.requestMatchers(
-                                "/api/v1/roles").hasRole( "ADMIN"))
+                                "/api/v1/roles/**").hasRole( "ADMIN"))
                 .sessionManagement(session->
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider)

@@ -6,6 +6,7 @@ import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.info.License;
 import io.swagger.v3.oas.models.security.SecurityScheme;
+import io.swagger.v3.oas.models.servers.Server;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -18,10 +19,11 @@ public class SwaggerConfig {
     @Bean
     public OpenAPI fimaOpenAPI() {
         return new OpenAPI()
+                .addServersItem(new Server().url("/"))
                 .info(new Info().title("QuizWiz API")
                         .description("Aplicación de API Rest para la creacion de formularios de encuesta")
                         .version("v1.0.0")
-                        .license(new License().name("Quizwiz v1.0").url("http://quizwiz.com")))
+                        .license(new License().name("Quizwiz v1.0").url("https://quizwiz.com")))
                 .externalDocs(new ExternalDocumentation()
                         .description("Documentacion de la API")
                         .url("https://quizwiz.com/docs"))
