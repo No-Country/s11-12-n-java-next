@@ -8,7 +8,6 @@ import {
 } from "@nextui-org/react";
 import useStore from "@/hooks/useStore";
 import { useSessionStore } from "@/store/sessionStore";
-import Link from "next/link";
 
 function Avatar() {
   const session = useStore(useSessionStore, (state) => state.session);
