@@ -1,6 +1,7 @@
 package com.selecionado.quizwiz.controller;
 
 import com.selecionado.quizwiz.dto.request.TeamDtoReq;
+import com.selecionado.quizwiz.dto.response.MemberFormDtoRes;
 import com.selecionado.quizwiz.dto.response.TeamDTORes;
 import com.selecionado.quizwiz.service.TeamServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,7 @@ public class TeamController {
         return ResponseEntity.ok(teamService.getTeamById(id));
     }
     @PostMapping()
-    public ResponseEntity<TeamDTORes> create(@RequestBody TeamDtoReq teamDtoReq) {
+    public ResponseEntity<MemberFormDtoRes> create(@RequestBody TeamDtoReq teamDtoReq) {
         return new ResponseEntity<>(teamService.create(teamDtoReq), HttpStatus.CREATED);
     }
     @PutMapping("/{id}")
