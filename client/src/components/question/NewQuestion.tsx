@@ -5,10 +5,11 @@ import Image from "next/image";
 import { Input, Select, SelectItem } from "@nextui-org/react";
 
 import NewFormLayout from "../newForm/NewFormLayout";
-import SimpleIcon from "@/assets/icons/circle-outline.svg"
-import TextIcon from "@/assets/icons/text.svg"
-import MultipleIcon from "@/assets/icons/multiple-select.svg"
-import StarIcon from "@/assets/icons/star.svg"
+import SimpleIcon from "@/assets/icons/circle-outline.svg";
+import TextIcon from "@/assets/icons/text.svg";
+import MultipleIcon from "@/assets/icons/multiple-select.svg";
+import StarIcon from "@/assets/icons/star.svg";
+import DateIcon from "@/assets/icons/date.svg";
 
 export default function NewQuestion({
   questionTitle,
@@ -22,8 +23,8 @@ export default function NewQuestion({
   const [value, setValue] = useState<Set<string>>(new Set([]));
 
   const handleSelectionChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    console.log(value)
-    setValue(new Set([e.target.value]))
+    console.log(value);
+    setValue(new Set([e.target.value]));
     setQuestionType(Array.from(value.values())[0]);
   };
 
@@ -32,31 +33,31 @@ export default function NewQuestion({
       label: "Texto",
       value: "text",
       img: TextIcon,
-      alt: "Icono de una figura texto"
+      alt: "Icono de una figura texto",
     },
     {
       label: "Selección simple",
       value: "simple",
       img: SimpleIcon,
-      alt: ""
+      alt: "",
     },
     {
       label: "Selección múltiple",
       value: "multiple",
       img: MultipleIcon,
-      alt: ""
+      alt: "",
     },
     {
       label: "Calificación de estrellas",
       value: "stars",
       img: StarIcon,
-      alt: ""
+      alt: "",
     },
     {
       label: "Fecha",
       value: "date",
-      img: "",
-      alt: ""
+      img: DateIcon,
+      alt: "",
     },
   ];
 
@@ -70,14 +71,17 @@ export default function NewQuestion({
         />
         <Select
           selectedKeys={value}
-          placeholder="Select a type of question"
+          placeholder="Selecciona el tipo de pregunta"
           isRequired
           onChange={handleSelectionChange}
           size="sm"
+          aria-label="Selector tipo de pregunta"
         >
           {items.map((item, i) => (
             <SelectItem
-              startContent={<Image src={item.img} alt={item.alt} width={10} height={10} />}
+              startContent={
+                <Image src={item.img} alt={item.alt} width={10} height={10} />
+              }
               className="p-2 hover:bg-slate-100 transition-colors"
               key={item.value}
               value={item.value}
