@@ -8,14 +8,7 @@ import Link from "next/link";
 
 const selectCardByState = ({ state }: { state: string }) => {
   if (state === "En construcción")
-    return (
-      <Image
-        src={ToolsIcon}
-        alt="Un icono de dos herramientas"
-        width={53}
-        height={53}
-      />
-    );
+    return <Image src={ToolsIcon} alt="Un icono de dos herramientas" />;
   if (state === "Publicados")
     return (
       <Image
@@ -49,20 +42,23 @@ export default function TeamCard({
 }) {
   return (
     <Card
-      className="border-1 bg-transparent border-[#6979F8]"
+      className="h-24 bg-white rounded-3xl border-3 border-indigo-500 text-teal-700 leading-none w-full"
+      shadow="sm"
       isPressable
       as={Link}
       href={`/quizz/${teamId}`}
     >
-      <div className="flex justify-between">
-        <CardBody>
-          <small className="text-primary">{organizationName}</small>
+      <CardBody className="flex flex-row items-center p-4">
+        <div>
+          <small className="text-primary text-lg font-black">
+            {organizationName}
+          </small>
           <h3 className="text-primary text-lg">
             <strong>{teamName}</strong>
           </h3>
-        </CardBody>
-        {selectCardByState({ state })}
-      </div>
+        </div>
+        <div className="ml-auto w-12 h-12">{selectCardByState({ state })}</div>
+      </CardBody>
     </Card>
   );
 }
