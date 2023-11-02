@@ -33,9 +33,6 @@ function Avatar() {
           >
             <p className="font-semibold">{session?.email}</p>
           </DropdownItem>
-          <DropdownItem key="settings" as={Link} href="/profile">
-            Mi Perfil
-          </DropdownItem>
           <DropdownItem
             textValue="Cerrar Sesión"
             key="logout"
